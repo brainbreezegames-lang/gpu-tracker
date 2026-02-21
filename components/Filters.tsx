@@ -1,6 +1,6 @@
-import React, { useState } from 'react';
+import React, { useState, useRef, useEffect, useCallback } from 'react';
 import { FilterState, Commitment } from '../types';
-import { Filter, RotateCcw } from 'lucide-react';
+import { Filter, RotateCcw, X, ChevronDown, Search } from 'lucide-react';
 import { InfoTooltip } from './ui';
 import { getFreshness } from '../services/gpuUtils';
 
@@ -34,12 +34,167 @@ const GPU_COUNT_OPTIONS = [
 ];
 
 const VRAM_PRESETS = [8, 24, 48, 80];
-const MODEL_LIMIT  = 8;
 
-// ── Sub-components ────────────────────────────────────────────────────────────
+// ── Searchable multi-select dropdown ─────────────────────────────────────────
+
+interface MultiSelectProps {
+  options: string[];
+  selected: string[];
+  onChange: (selected: string[]) => void;
+  placeholder: string;
+  emptyText?: string;
+}
+
+const MultiSelect: React.FC<MultiSelectProps> = ({ options, selected, onChange, placeholder, emptyText = 'No options' }) => {
+  const [open, setOpen]       = useState(false);
+  const [query, setQuery]     = useState('');
+  const containerRef          = useRef<HTMLDivElement>(null);
+  const inputRef              = useRef<HTMLInputElement>(null);
+
+  // Close on outside click
+  useEffect(() => {
+    const handler = (e: MouseEvent) => {
+      if (containerRef.current && !containerRef.current.contains(e.target as Node)) {
+        setOpen(false);
+        setQuery('');
+      }
+    };
+    document.addEventListener('mousedown', handler);
+    return () => document.removeEventListener('mousedown', handler);
+  }, []);
+
+  const filtered = query
+    ? options.filter((o) => o.toLowerCase().includes(query.toLowerCase()))
+    : options;
+
+  const toggle = useCallback((value: string) => {
+    onChange(
+      selected.includes(value)
+        ? selected.filter((s) => s !== value)
+        : [...selected, value],
+    );
+  }, [selected, onChange]);
+
+  const remove = useCallback((value: string, e: React.MouseEvent) => {
+    e.stopPropagation();
+    onChange(selected.filter((s) => s !== value));
+  }, [selected, onChange]);
+
+  const openDropdown = () => {
+    setOpen(true);
+    setTimeout(() => inputRef.current?.focus(), 0);
+  };
+
+  return (
+    <div ref={containerRef} className="relative">
+      {/* Trigger / tag display */}
+      <button
+        type="button"
+        onClick={openDropdown}
+        className={`w-full text-left flex items-center gap-1.5 flex-wrap min-h-[34px] px-2.5 py-1.5 rounded-lg border transition-colors text-sm ${
+          open
+            ? 'border-brand-500 ring-1 ring-brand-500/30 bg-white dark:bg-slate-900'
+            : 'border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-950 hover:border-slate-300 dark:hover:border-slate-600'
+        }`}
+      >
+        {selected.length === 0 ? (
+          <span className="text-slate-400 dark:text-slate-500 text-xs flex-1">{placeholder}</span>
+        ) : (
+          selected.map((s) => (
+            <span
+              key={s}
+              className="inline-flex items-center gap-1 bg-slate-900 dark:bg-white text-white dark:text-slate-900 text-[11px] font-semibold px-2 py-0.5 rounded-md"
+            >
+              {s}
+              <button
+                type="button"
+                onClick={(e) => remove(s, e)}
+                className="opacity-60 hover:opacity-100 transition-opacity"
+              >
+                <X className="h-2.5 w-2.5" />
+              </button>
+            </span>
+          ))
+        )}
+        <ChevronDown className={`h-3.5 w-3.5 text-slate-400 ml-auto shrink-0 transition-transform ${open ? 'rotate-180' : ''}`} />
+      </button>
+
+      {/* Dropdown panel */}
+      {open && (
+        <div className="absolute z-50 w-full top-full mt-1 bg-white dark:bg-slate-900 rounded-lg border border-slate-200 dark:border-slate-700 shadow-lg overflow-hidden">
+          {/* Search input */}
+          <div className="p-2 border-b border-slate-100 dark:border-slate-800">
+            <div className="relative">
+              <Search className="absolute left-2 top-1/2 -translate-y-1/2 h-3 w-3 text-slate-400" />
+              <input
+                ref={inputRef}
+                type="text"
+                value={query}
+                onChange={(e) => setQuery(e.target.value)}
+                placeholder="Search…"
+                className="w-full pl-6 pr-2 py-1 text-xs bg-slate-50 dark:bg-slate-950 rounded-md border border-slate-200 dark:border-slate-700 text-slate-900 dark:text-slate-100 placeholder-slate-400 outline-none focus:border-brand-500"
+              />
+            </div>
+          </div>
+
+          {/* Options list */}
+          <div className="max-h-48 overflow-y-auto py-1">
+            {filtered.length === 0 ? (
+              <p className="text-xs text-slate-400 px-3 py-2 italic">{emptyText}</p>
+            ) : (
+              filtered.map((option) => {
+                const checked = selected.includes(option);
+                return (
+                  <button
+                    key={option}
+                    type="button"
+                    onClick={() => toggle(option)}
+                    className={`w-full flex items-center gap-2 px-3 py-1.5 text-left text-xs transition-colors ${
+                      checked
+                        ? 'bg-slate-50 dark:bg-slate-800 text-slate-900 dark:text-slate-100 font-medium'
+                        : 'text-slate-600 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-800/50 hover:text-slate-900 dark:hover:text-slate-200'
+                    }`}
+                  >
+                    <span className={`h-3.5 w-3.5 shrink-0 rounded border flex items-center justify-center transition-colors ${
+                      checked
+                        ? 'bg-slate-900 dark:bg-white border-slate-900 dark:border-white'
+                        : 'border-slate-300 dark:border-slate-600'
+                    }`}>
+                      {checked && (
+                        <svg className="h-2 w-2 text-white dark:text-slate-900" viewBox="0 0 10 10" fill="none">
+                          <path d="M1.5 5L4 7.5L8.5 2.5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+                        </svg>
+                      )}
+                    </span>
+                    {option}
+                  </button>
+                );
+              })
+            )}
+          </div>
+
+          {/* Footer: clear / select all */}
+          {selected.length > 0 && (
+            <div className="border-t border-slate-100 dark:border-slate-800 px-3 py-1.5">
+              <button
+                type="button"
+                onClick={() => { onChange([]); setOpen(false); }}
+                className="text-[11px] text-slate-500 dark:text-slate-400 hover:text-slate-800 dark:hover:text-slate-200 font-medium transition-colors"
+              >
+                Clear {selected.length} selected
+              </button>
+            </div>
+          )}
+        </div>
+      )}
+    </div>
+  );
+};
+
+// ── Section label ─────────────────────────────────────────────────────────────
 
 const SectionLabel: React.FC<{ title: string; count?: number; tooltip?: string }> = ({ title, count, tooltip }) => (
-  <div className="flex items-center justify-between mb-3">
+  <div className="flex items-center justify-between mb-2.5">
     <div className="flex items-center gap-1.5">
       <h3 className="text-[11px] font-bold text-slate-500 dark:text-slate-400 uppercase tracking-wider">{title}</h3>
       {tooltip && <InfoTooltip content={tooltip} side="right" />}
@@ -52,23 +207,14 @@ const SectionLabel: React.FC<{ title: string; count?: number; tooltip?: string }
   </div>
 );
 
-const Checkbox: React.FC<{ label: string; checked: boolean; onChange: () => void }> = ({ label, checked, onChange }) => (
-  <label className="flex items-center group cursor-pointer py-2 gap-2.5">
-    <input
-      type="checkbox"
-      checked={checked}
-      onChange={onChange}
-      className="h-3.5 w-3.5 rounded border-slate-300 dark:border-slate-600 text-brand-600 focus:ring-brand-500 bg-white dark:bg-slate-800 cursor-pointer shrink-0"
-    />
-    <span className={`text-sm truncate transition-colors ${
-      checked
-        ? 'text-slate-900 dark:text-slate-100 font-medium'
-        : 'text-slate-600 dark:text-slate-400 group-hover:text-slate-800 dark:group-hover:text-slate-200'
-    }`}>
-      {label}
-    </span>
-  </label>
-);
+// ── Chip button ───────────────────────────────────────────────────────────────
+
+const chip = (active: boolean) =>
+  `px-3.5 py-2 text-xs rounded-lg font-semibold border transition-colors ${
+    active
+      ? 'bg-slate-900 dark:bg-white text-white dark:text-slate-900 border-slate-900 dark:border-white'
+      : 'bg-white dark:bg-slate-800 text-slate-600 dark:text-slate-400 border-slate-200 dark:border-slate-700 hover:border-slate-400 dark:hover:border-slate-500'
+  }`;
 
 // ── Main component ────────────────────────────────────────────────────────────
 
@@ -76,10 +222,6 @@ export const Filters: React.FC<FiltersProps> = ({
   filters, setFilters, resultCount,
   availableModels, availableProviders, availableRegions, lastUpdated,
 }) => {
-  const [showAllModels, setShowAllModels] = useState(false);
-
-  const visibleModels = showAllModels ? availableModels : availableModels.slice(0, MODEL_LIMIT);
-
   const toggleList = (
     category: 'models' | 'providers' | 'regions' | 'commitment' | 'gpuCounts',
     value: string | number,
@@ -101,14 +243,7 @@ export const Filters: React.FC<FiltersProps> = ({
     filters.gpuCounts.length > 0 || filters.providers.length > 0 ||
     filters.models.length > 0 || filters.commitment.length > 0 || filters.regions.length > 0;
 
-  const resetAll = () => { setFilters(DEFAULT_FILTERS); setShowAllModels(false); };
-
-  const chip = (active: boolean) =>
-    `px-3.5 py-2 text-xs rounded-lg font-semibold border transition-colors ${
-      active
-        ? 'bg-slate-900 dark:bg-white text-white dark:text-slate-900 border-slate-900 dark:border-white'
-        : 'bg-white dark:bg-slate-800 text-slate-600 dark:text-slate-400 border-slate-200 dark:border-slate-700 hover:border-slate-400 dark:hover:border-slate-500'
-    }`;
+  const resetAll = () => setFilters(DEFAULT_FILTERS);
 
   return (
     <div className="bg-white dark:bg-slate-900 rounded-xl ring-1 ring-black/[0.06] dark:ring-white/[0.06] shadow-[0_1px_3px_0_rgb(0_0_0/_0.08),0_1px_2px_-1px_rgb(0_0_0/_0.08)] dark:shadow-[0_1px_3px_0_rgb(0_0_0/_0.3)] overflow-hidden transition-colors duration-300">
@@ -140,7 +275,7 @@ export const Filters: React.FC<FiltersProps> = ({
         })()}
       </div>
 
-      <div className="px-5 py-5 space-y-6">
+      <div className="px-5 py-5 space-y-5">
 
         {/* ── Price / Hour ─────────────────────────────────── */}
         <div>
@@ -210,85 +345,71 @@ export const Filters: React.FC<FiltersProps> = ({
           </div>
         </div>
 
-        {/* ── Divider: primary / secondary ─────────────────── */}
+        {/* ── Divider ──────────────────────────────────────── */}
         <div className="-mx-4 border-t border-dashed border-slate-100 dark:border-slate-800" />
 
         {/* ── Provider ─────────────────────────────────────── */}
         <div>
-          <SectionLabel title="Provider" count={filters.providers.length || undefined} tooltip={"Filter by specific cloud provider.\nEnterprise (AWS/GCP/Azure) = highest reliability. Marketplace (Vast.ai) = cheapest but variable. Hover badges in the table for details on each provider."} />
-          {availableProviders.length === 0 ? (
-            <p className="text-xs text-slate-400 italic">Loading…</p>
-          ) : (
-            <div className="space-y-0.5">
-              {availableProviders.map((p) => (
-                <Checkbox
-                  key={p} label={p}
-                  checked={filters.providers.includes(p)}
-                  onChange={() => toggleList('providers', p)}
-                />
-              ))}
-            </div>
-          )}
+          <SectionLabel
+            title="Provider"
+            count={filters.providers.length || undefined}
+            tooltip={"Filter by specific cloud provider.\nEnterprise (AWS/GCP/Azure) = highest reliability. Marketplace (Vast.ai) = cheapest but variable."}
+          />
+          <MultiSelect
+            options={availableProviders}
+            selected={filters.providers}
+            onChange={(vals) => setFilters((p) => ({ ...p, providers: vals }))}
+            placeholder="All providers"
+            emptyText="No providers found"
+          />
         </div>
 
         {/* ── GPU Model ────────────────────────────────────── */}
         <div>
-          <SectionLabel title="GPU Model" count={filters.models.length || undefined} tooltip={"Filter by GPU architecture.\nPerformance order (training): H100 > H200 > A100 > L40S > RTX 4090\nFor inference, VRAM matters more than raw compute."} />
-          {availableModels.length === 0 ? (
-            <p className="text-xs text-slate-400 italic">Loading…</p>
-          ) : (
-            <div className="space-y-0.5">
-              {visibleModels.map((m) => (
-                <Checkbox
-                  key={m} label={m}
-                  checked={filters.models.includes(m)}
-                  onChange={() => toggleList('models', m)}
-                />
-              ))}
-              {availableModels.length > MODEL_LIMIT && (
-                <button
-                  onClick={() => setShowAllModels(!showAllModels)}
-                  className="text-xs text-brand-600 dark:text-brand-400 font-semibold pt-1 hover:underline block"
-                >
-                  {showAllModels
-                    ? 'Show less'
-                    : `+ ${availableModels.length - MODEL_LIMIT} more models`}
-                </button>
-              )}
-            </div>
-          )}
+          <SectionLabel
+            title="GPU Model"
+            count={filters.models.length || undefined}
+            tooltip={"Filter by GPU architecture.\nPerformance order (training): H100 > H200 > A100 > L40S > RTX 4090\nFor inference, VRAM matters more than raw compute."}
+          />
+          <MultiSelect
+            options={availableModels}
+            selected={filters.models}
+            onChange={(vals) => setFilters((p) => ({ ...p, models: vals }))}
+            placeholder="All GPU models"
+            emptyText="No models found"
+          />
         </div>
 
         {/* ── Commitment ───────────────────────────────────── */}
         <div>
           <SectionLabel title="Commitment" count={filters.commitment.length || undefined} tooltip={"On-Demand: pay per hour, cancel anytime.\nSpot: cheaper (40–80% off) but can be interrupted with little notice — not suitable for long jobs.\nReserved (1–3yr): significant discount for committing upfront."} />
-          <div className="space-y-0.5">
+          <div className="flex flex-wrap gap-1.5">
             {Object.values(Commitment).map((c) => (
-              <Checkbox
-                key={c} label={c}
-                checked={filters.commitment.includes(c)}
-                onChange={() => toggleList('commitment', c)}
-              />
+              <button
+                key={c}
+                onClick={() => toggleList('commitment', c)}
+                className={chip(filters.commitment.includes(c))}
+              >
+                {c}
+              </button>
             ))}
           </div>
         </div>
 
         {/* ── Region ───────────────────────────────────────── */}
         <div>
-          <SectionLabel title="Region" count={filters.regions.length || undefined} tooltip={"Datacenter location.\nCloser = lower latency for data uploads.\nMay affect compliance requirements (GDPR, HIPAA)."} />
-          {availableRegions.length === 0 ? (
-            <p className="text-xs text-slate-400 italic">Loading…</p>
-          ) : (
-            <div className="space-y-0.5">
-              {availableRegions.map((r) => (
-                <Checkbox
-                  key={r} label={r}
-                  checked={filters.regions.includes(r)}
-                  onChange={() => toggleList('regions', r)}
-                />
-              ))}
-            </div>
-          )}
+          <SectionLabel
+            title="Region"
+            count={filters.regions.length || undefined}
+            tooltip={"Datacenter location.\nCloser = lower latency for data uploads.\nMay affect compliance requirements (GDPR, HIPAA)."}
+          />
+          <MultiSelect
+            options={availableRegions}
+            selected={filters.regions}
+            onChange={(vals) => setFilters((p) => ({ ...p, regions: vals }))}
+            placeholder="All regions"
+            emptyText="No regions found"
+          />
         </div>
 
       </div>
