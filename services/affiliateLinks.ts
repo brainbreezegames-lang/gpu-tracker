@@ -46,16 +46,22 @@ const AFFILIATE_CODES: Record<string, string> = {
 
 // ── URL patterns for each provider ──────────────────────────────────────────
 const AFFILIATE_URL_BUILDERS: Record<string, (base: string, code: string) => string> = {
-  'RunPod':       (url, code) => `https://runpod.io/console/gpu-cloud?ref=${code}`,
-  'Vast.ai':      (url, code) => `https://cloud.vast.ai/?ref_id=${code}`,
-  'Lambda Labs':  (url, code) => appendParam(url, 'ref', code),
-  'TensorDock':   (url, code) => appendParam(url, 'ref', code),
-  'Vultr':        (url, code) => `https://www.vultr.com/?ref=${code}`,
-  'DigitalOcean': (url, code) => `https://m.do.co/${code}`,
-  'CoreWeave':    (url, code) => appendParam(url, 'partner', code),
-  'Nebius':       (url, code) => appendParam(url, 'ref', code),
-  'FluidStack':   (url, code) => appendParam(url, 'ref', code),
-  'Cudo Compute': (url, code) => appendParam(url, 'ref', code),
+  'RunPod':        (url, code) => `https://runpod.io/console/gpu-cloud?ref=${code}`,
+  'Vast.ai':       (url, code) => `https://cloud.vast.ai/?ref_id=${code}`,
+  'Lambda Labs':   (url, code) => appendParam(url, 'ref', code),
+  'TensorDock':    (url, code) => appendParam(url, 'ref', code),
+  'Vultr':         (url, code) => `https://www.vultr.com/?ref=${code}`,
+  'DigitalOcean':  (url, code) => `https://m.do.co/${code}`,
+  'CoreWeave':     (url, code) => appendParam(url, 'partner', code),
+  'Nebius':        (url, code) => appendParam(url, 'ref', code),
+  'FluidStack':    (url, code) => appendParam(url, 'ref', code),
+  'Cudo Compute':  (url, code) => appendParam(url, 'ref', code),
+  'Scaleway':      (url, code) => appendParam(url, 'utm_source', code),
+  'Hyperstack':    (url, code) => appendParam(url, 'ref', code),
+  'Genesis Cloud': (url, code) => appendParam(url, 'ref', code),
+  'OVHcloud':      (url, code) => appendParam(url, 'ref', code),
+  'Crusoe':        (url, code) => appendParam(url, 'ref', code),
+  'Latitude.sh':   (url, code) => appendParam(url, 'ref', code),
 };
 
 function appendParam(url: string, param: string, value: string): string {

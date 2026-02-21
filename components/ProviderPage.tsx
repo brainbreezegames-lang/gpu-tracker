@@ -37,6 +37,13 @@ const PROVIDER_URLS: Record<string, string> = {
   'CloudRift':     'https://cloudrift.ai',
   'Verda':         'https://verda.io',
   'OCI':           'https://www.oracle.com/cloud/compute/gpu/',
+  'Scaleway':      'https://www.scaleway.com/en/pricing/gpu/',
+  'Hyperstack':    'https://www.hyperstack.cloud/gpu-cloud-pricing',
+  'Genesis Cloud': 'https://www.genesis.cloud/gpu-cloud/',
+  'OVHcloud':      'https://www.ovhcloud.com/en/public-cloud/gpu/',
+  'CoreWeave':     'https://www.coreweave.com/pricing',
+  'Crusoe':        'https://crusoe.ai/cloud/pricing/',
+  'Latitude.sh':   'https://www.latitude.sh/pricing',
 };
 
 export const ProviderPage: React.FC<Props> = ({ data, isLoading }) => {
