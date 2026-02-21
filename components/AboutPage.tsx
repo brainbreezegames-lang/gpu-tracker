@@ -8,7 +8,7 @@ export const AboutPage: React.FC = () => (
     <div>
       <h1 className="text-xl font-bold text-slate-900 dark:text-white">About GPU Tracker</h1>
       <p className="text-sm text-slate-500 dark:text-slate-400 mt-1">
-        The Kayak for GPU Cloud Computing — real-time price comparison across 15 providers.
+        The Kayak for GPU Cloud Computing — real-time price comparison across 22 providers.
       </p>
     </div>
 
@@ -20,7 +20,7 @@ export const AboutPage: React.FC = () => (
       </div>
       <div className="text-sm text-slate-600 dark:text-slate-400 leading-relaxed space-y-2">
         <p>
-          GPU Tracker aggregates real-time GPU cloud pricing from 15 providers into a single searchable,
+          GPU Tracker aggregates real-time GPU cloud pricing from 22 providers into a single searchable,
           filterable database. Compare H100 spot prices, find the best $/VRAM ratio, or discover
           which cloud has the cheapest A100 instances.
         </p>
@@ -41,7 +41,7 @@ export const AboutPage: React.FC = () => (
       </div>
       <div className="space-y-3">
         {[
-          { icon: Globe,     title: 'Provider APIs',  desc: 'Queried via gpuhunt — AWS, Azure, GCP, OCI, Lambda Labs, RunPod, Vast.ai, Vultr, Cudo, Nebius, TensorDock, DigitalOcean, HotAisle, CloudRift, Verda.' },
+          { icon: Globe,     title: 'Provider APIs',  desc: 'Queried via gpuhunt + custom scrapers — AWS, Azure, GCP, OCI, Lambda Labs, RunPod, Vast.ai, Vultr, Cudo, Nebius, TensorDock, DigitalOcean, HotAisle, CloudRift, Verda, Scaleway, Hyperstack, Genesis Cloud, OVHcloud, CoreWeave, Crusoe, Latitude.sh.' },
           { icon: RefreshCw, title: 'GitHub Actions',  desc: 'Cron every 6h: fetch, deduplicate, commit JSON.' },
           { icon: Database,  title: 'Static JSON',     desc: 'Single gpu-data.json (~5MB) on Vercel CDN. No database.' },
           { icon: Cpu,       title: 'Client-Side UI',  desc: 'All filtering/sorting runs in your browser — instant, no server calls.' },
