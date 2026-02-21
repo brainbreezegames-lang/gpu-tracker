@@ -145,7 +145,7 @@ export const Badge: React.FC<BadgeProps> = ({
   const sizeClass = size === 'xs' ? 'text-[9px] px-1.5 py-0.5' : 'text-[10px] px-2 py-0.5';
 
   const el = (
-    <span className={`inline-flex font-semibold rounded cursor-help ${sizeClass} ${classes} ${className}`}>
+    <span className={`inline-flex font-semibold rounded-md cursor-help ${sizeClass} ${classes} ${className}`}>
       {label}
     </span>
   );
