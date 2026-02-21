@@ -113,7 +113,7 @@ const FAQ: { q: string; a: string }[] = [
   },
   {
     q: 'What is the True Monthly Cost (TMC) calculator?',
-    a: 'GPU $/hr is only part of the bill. TMC adds storage, egress, and billed-when-stopped costs to show your real monthly spend — with provider-specific data for all 15 providers.',
+    a: 'GPU $/hr is only part of the bill. TMC adds storage, egress, and billed-when-stopped costs to show your real monthly spend — with provider-specific data for all 22 providers.',
   },
   {
     q: 'Can I cancel anytime?',

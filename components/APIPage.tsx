@@ -94,8 +94,8 @@ for row in h100s[:5]:
       </div>
       <p className="text-xs text-slate-400 dark:text-slate-500">
         Data sourced via{' '}
-        <a href="https://github.com/dstackai/gpuhunt" target="_blank" rel="noreferrer" className="text-brand-600 dark:text-brand-400 hover:underline">gpuhunt</a>.
-        Refreshed every 6 hours.
+        <a href="https://github.com/dstackai/gpuhunt" target="_blank" rel="noreferrer" className="text-brand-600 dark:text-brand-400 hover:underline">gpuhunt</a>{' '}
+        + custom scrapers. Refreshed every 6 hours.
       </p>
     </Section>
   </div>
