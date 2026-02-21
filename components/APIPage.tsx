@@ -88,7 +88,7 @@ for row in h100s[:5]:
     {/* Data sources */}
     <Section title="Providers" icon={RefreshCw}>
       <div className="flex flex-wrap gap-1.5 mb-3">
-        {['AWS', 'Azure', 'GCP', 'OCI', 'Lambda Labs', 'RunPod', 'Vast.ai', 'Vultr', 'Cudo', 'Nebius', 'TensorDock', 'DigitalOcean', 'HotAisle', 'CloudRift', 'Verda'].map((name) => (
+        {['AWS', 'Azure', 'GCP', 'OCI', 'Lambda Labs', 'RunPod', 'Vast.ai', 'Vultr', 'Cudo', 'Nebius', 'TensorDock', 'DigitalOcean', 'HotAisle', 'CloudRift', 'Verda', 'Scaleway', 'Hyperstack', 'Genesis Cloud', 'OVHcloud', 'CoreWeave', 'Crusoe', 'Latitude.sh'].map((name) => (
           <span key={name} className="text-xs px-2 py-1 rounded-md bg-slate-50 dark:bg-slate-800/50 text-slate-600 dark:text-slate-400 font-medium">{name}</span>
         ))}
       </div>
