@@ -156,13 +156,33 @@ const ComparisonPage: React.FC<{
   const [copied,         setCopied]         = useState(false);
   const [activeWorkload, setActiveWorkload] = useState<string>('all');
 
+  // ── Debounced search: keep input snappy, defer expensive filterData ────────
+  const [searchInput, setSearchInput] = useState(() => filters.search);
+  useEffect(() => {
+    const t = setTimeout(() => {
+      setFilters((p) => (p.search === searchInput ? p : { ...p, search: searchInput }));
+    }, 160);
+    return () => clearTimeout(t);
+  }, [searchInput]);
+
+  // ── Deferred filters: React defers this computation, paint stays smooth ────
+  const deferredFilters = useDeferredValue(filters);
+
   const availableModels    = useMemo(() => [...new Set(data.map((d) => d.model))].sort(),    [data]);
   const availableProviders = useMemo(() => [...new Set(data.map((d) => d.provider))].sort(), [data]);
   const availableRegions   = useMemo(() => [...new Set(data.map((d) => d.region))].sort(),   [data]);
 
+  // ── Two-stage pipeline: filter first, then sort/rank ──────────────────────
+  // Separating these prevents filterData (O(n) over 12k items) from re-running
+  // on sort-only changes — which previously caused unnecessary full re-scans.
+  const filteredData = useMemo(
+    () => filterData(data, deferredFilters),
+    [data, deferredFilters],
+  );
+
   const processedData = useMemo(
-    () => applyRankMode(sortData(filterData(data, filters), sort), rankMode),
-    [data, filters, sort, rankMode],
+    () => applyRankMode(sortData(filteredData, sort), rankMode),
+    [filteredData, sort, rankMode],
   );
   useEffect(() => { setPage(1); }, [filters, sort, rankMode]);
 
