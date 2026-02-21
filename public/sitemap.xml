@@ -262,6 +262,12 @@
     <lastmod>2026-02-21</lastmod>
   </url>
   <url>
+    <loc>https://gpu-tracker.dev/gpu/rtx4070sti</loc>
+    <changefreq>hourly</changefreq>
+    <priority>0.9</priority>
+    <lastmod>2026-02-21</lastmod>
+  </url>
+  <url>
     <loc>https://gpu-tracker.dev/gpu/rtx4070ti</loc>
     <changefreq>hourly</changefreq>
     <priority>0.9</priority>
@@ -292,12 +298,6 @@
     <lastmod>2026-02-21</lastmod>
   </url>
   <url>
-    <loc>https://gpu-tracker.dev/gpu/rtx5070</loc>
-    <changefreq>hourly</changefreq>
-    <priority>0.9</priority>
-    <lastmod>2026-02-21</lastmod>
-  </url>
-  <url>
     <loc>https://gpu-tracker.dev/gpu/rtx5070ti</loc>
     <changefreq>hourly</changefreq>
     <priority>0.9</priority>
@@ -323,12 +323,6 @@
   </url>
   <url>
     <loc>https://gpu-tracker.dev/gpu/rtx6000ada</loc>
-    <changefreq>hourly</changefreq>
-    <priority>0.9</priority>
-    <lastmod>2026-02-21</lastmod>
-  </url>
-  <url>
-    <loc>https://gpu-tracker.dev/gpu/rtxpro4000</loc>
     <changefreq>hourly</changefreq>
     <priority>0.9</priority>
     <lastmod>2026-02-21</lastmod>
