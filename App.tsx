@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useMemo, useCallback } from 'react';
+import React, { useEffect, useState, useMemo, useCallback, useDeferredValue } from 'react';
 import { Routes, Route, useNavigate, useLocation } from 'react-router-dom';
 import { GPUModelPage } from './components/GPUModelPage';
 import { ProviderPage } from './components/ProviderPage';
