@@ -47,15 +47,53 @@ interface MultiSelectProps {
 }
 
 const MultiSelect: React.FC<MultiSelectProps> = ({ options, selected, onChange, placeholder, emptyText = 'No options' }) => {
-  const [open, setOpen]       = useState(false);
-  const [query, setQuery]     = useState('');
-  const containerRef          = useRef<HTMLDivElement>(null);
-  const inputRef              = useRef<HTMLInputElement>(null);
+  const [open, setOpen]             = useState(false);
+  const [query, setQuery]           = useState('');
+  const [dropdownStyle, setDropdownStyle] = useState<React.CSSProperties>({});
+  const containerRef                = useRef<HTMLDivElement>(null);
+  const triggerRef                  = useRef<HTMLButtonElement>(null);
+  const dropdownRef                 = useRef<HTMLDivElement>(null);
+  const inputRef                    = useRef<HTMLInputElement>(null);
 
-  // Close on outside click
+  // Recalculate portal position from trigger's bounding rect
+  const updatePosition = useCallback(() => {
+    if (!triggerRef.current) return;
+    const rect            = triggerRef.current.getBoundingClientRect();
+    const viewportHeight  = window.innerHeight;
+    const dropdownHeight  = 280; // search ~40px + max-h-48 (192px) + footer ~48px
+    const spaceBelow      = viewportHeight - rect.bottom;
+    const openUpward      = spaceBelow < dropdownHeight && rect.top > dropdownHeight;
+
+    setDropdownStyle({
+      position: 'fixed',
+      left:     rect.left,
+      width:    rect.width,
+      zIndex:   9999,
+      ...(openUpward
+        ? { bottom: viewportHeight - rect.top + 4, top: 'auto' }
+        : { top: rect.bottom + 4 }),
+    });
+  }, []);
+
+  // Attach scroll/resize listeners while open to keep portal aligned
+  useEffect(() => {
+    if (!open) return;
+    updatePosition();
+    window.addEventListener('scroll',  updatePosition, true);
+    window.addEventListener('resize',  updatePosition);
+    return () => {
+      window.removeEventListener('scroll',  updatePosition, true);
+      window.removeEventListener('resize',  updatePosition);
+    };
+  }, [open, updatePosition]);
+
+  // Close on outside click — must check both trigger container AND portal div
   useEffect(() => {
     const handler = (e: MouseEvent) => {
-      if (containerRef.current && !containerRef.current.contains(e.target as Node)) {
+      if (
+        containerRef.current && !containerRef.current.contains(e.target as Node) &&
+        dropdownRef.current  && !dropdownRef.current.contains(e.target as Node)
+      ) {
         setOpen(false);
         setQuery('');
       }
@@ -86,10 +124,83 @@ const MultiSelect: React.FC<MultiSelectProps> = ({ options, selected, onChange, 
     setTimeout(() => inputRef.current?.focus(), 0);
   };
 
+  const dropdownPanel = open && (
+    <div
+      ref={dropdownRef}
+      style={dropdownStyle}
+      className="bg-white dark:bg-slate-900 rounded-lg border border-slate-200 dark:border-slate-700 shadow-xl overflow-hidden"
+    >
+      {/* Search input */}
+      <div className="p-2 border-b border-slate-100 dark:border-slate-800">
+        <div className="relative">
+          <Search className="absolute left-2 top-1/2 -translate-y-1/2 h-3 w-3 text-slate-400" />
+          <input
+            ref={inputRef}
+            type="text"
+            value={query}
+            onChange={(e) => setQuery(e.target.value)}
+            placeholder="Search…"
+            className="w-full pl-6 pr-2 py-1 text-xs bg-slate-50 dark:bg-slate-950 rounded-md border border-slate-200 dark:border-slate-700 text-slate-900 dark:text-slate-100 placeholder-slate-400 outline-none focus:border-brand-500"
+          />
+        </div>
+      </div>
+
+      {/* Options list */}
+      <div className="max-h-48 overflow-y-auto py-1">
+        {filtered.length === 0 ? (
+          <p className="text-xs text-slate-400 px-3 py-2 italic">{emptyText}</p>
+        ) : (
+          filtered.map((option) => {
+            const checked = selected.includes(option);
+            return (
+              <button
+                key={option}
+                type="button"
+                onClick={() => toggle(option)}
+                className={`w-full flex items-center gap-2 px-3 py-1.5 text-left text-xs transition-colors ${
+                  checked
+                    ? 'bg-slate-50 dark:bg-slate-800 text-slate-900 dark:text-slate-100 font-medium'
+                    : 'text-slate-600 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-800/50 hover:text-slate-900 dark:hover:text-slate-200'
+                }`}
+              >
+                <span className={`h-3.5 w-3.5 shrink-0 rounded border flex items-center justify-center transition-colors ${
+                  checked
+                    ? 'bg-slate-900 dark:bg-white border-slate-900 dark:border-white'
+                    : 'border-slate-300 dark:border-slate-600'
+                }`}>
+                  {checked && (
+                    <svg className="h-2 w-2 text-white dark:text-slate-900" viewBox="0 0 10 10" fill="none">
+                      <path d="M1.5 5L4 7.5L8.5 2.5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+                    </svg>
+                  )}
+                </span>
+                {option}
+              </button>
+            );
+          })
+        )}
+      </div>
+
+      {/* Footer: clear */}
+      {selected.length > 0 && (
+        <div className="border-t border-slate-100 dark:border-slate-800 px-3 py-1.5">
+          <button
+            type="button"
+            onClick={() => { onChange([]); setOpen(false); }}
+            className="text-[11px] text-slate-500 dark:text-slate-400 hover:text-slate-800 dark:hover:text-slate-200 font-medium transition-colors"
+          >
+            Clear {selected.length} selected
+          </button>
+        </div>
+      )}
+    </div>
+  );
+
   return (
     <div ref={containerRef} className="relative">
       {/* Trigger / tag display */}
       <button
+        ref={triggerRef}
         type="button"
         onClick={openDropdown}
         className={`w-full text-left flex items-center gap-1.5 flex-wrap min-h-[34px] px-2.5 py-1.5 rounded-lg border transition-colors text-sm ${
@@ -120,74 +231,8 @@ const MultiSelect: React.FC<MultiSelectProps> = ({ options, selected, onChange, 
         <ChevronDown className={`h-3.5 w-3.5 text-slate-400 ml-auto shrink-0 transition-transform ${open ? 'rotate-180' : ''}`} />
       </button>
 
-      {/* Dropdown panel */}
-      {open && (
-        <div className="absolute z-50 w-full top-full mt-1 bg-white dark:bg-slate-900 rounded-lg border border-slate-200 dark:border-slate-700 shadow-lg overflow-hidden">
-          {/* Search input */}
-          <div className="p-2 border-b border-slate-100 dark:border-slate-800">
-            <div className="relative">
-              <Search className="absolute left-2 top-1/2 -translate-y-1/2 h-3 w-3 text-slate-400" />
-              <input
-                ref={inputRef}
-                type="text"
-                value={query}
-                onChange={(e) => setQuery(e.target.value)}
-                placeholder="Search…"
-                className="w-full pl-6 pr-2 py-1 text-xs bg-slate-50 dark:bg-slate-950 rounded-md border border-slate-200 dark:border-slate-700 text-slate-900 dark:text-slate-100 placeholder-slate-400 outline-none focus:border-brand-500"
-              />
-            </div>
-          </div>
-
-          {/* Options list */}
-          <div className="max-h-48 overflow-y-auto py-1">
-            {filtered.length === 0 ? (
-              <p className="text-xs text-slate-400 px-3 py-2 italic">{emptyText}</p>
-            ) : (
-              filtered.map((option) => {
-                const checked = selected.includes(option);
-                return (
-                  <button
-                    key={option}
-                    type="button"
-                    onClick={() => toggle(option)}
-                    className={`w-full flex items-center gap-2 px-3 py-1.5 text-left text-xs transition-colors ${
-                      checked
-                        ? 'bg-slate-50 dark:bg-slate-800 text-slate-900 dark:text-slate-100 font-medium'
-                        : 'text-slate-600 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-800/50 hover:text-slate-900 dark:hover:text-slate-200'
-                    }`}
-                  >
-                    <span className={`h-3.5 w-3.5 shrink-0 rounded border flex items-center justify-center transition-colors ${
-                      checked
-                        ? 'bg-slate-900 dark:bg-white border-slate-900 dark:border-white'
-                        : 'border-slate-300 dark:border-slate-600'
-                    }`}>
-                      {checked && (
-                        <svg className="h-2 w-2 text-white dark:text-slate-900" viewBox="0 0 10 10" fill="none">
-                          <path d="M1.5 5L4 7.5L8.5 2.5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
-                        </svg>
-                      )}
-                    </span>
-                    {option}
-                  </button>
-                );
-              })
-            )}
-          </div>
-
-          {/* Footer: clear / select all */}
-          {selected.length > 0 && (
-            <div className="border-t border-slate-100 dark:border-slate-800 px-3 py-1.5">
-              <button
-                type="button"
-                onClick={() => { onChange([]); setOpen(false); }}
-                className="text-[11px] text-slate-500 dark:text-slate-400 hover:text-slate-800 dark:hover:text-slate-200 font-medium transition-colors"
-              >
-                Clear {selected.length} selected
-              </button>
-            </div>
-          )}
-        </div>
-      )}
+      {/* Render dropdown via portal so it escapes overflow:scroll containers */}
+      {typeof document !== 'undefined' && ReactDOM.createPortal(dropdownPanel, document.body)}
     </div>
   );
 };
