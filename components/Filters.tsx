@@ -111,10 +111,10 @@ export const Filters: React.FC<FiltersProps> = ({
     }`;
 
   return (
-    <div className="bg-white dark:bg-slate-900 rounded-xl border border-slate-200/60 dark:border-slate-800 overflow-hidden transition-colors duration-300">
+    <div className="bg-white dark:bg-slate-900 rounded-xl ring-1 ring-black/[0.06] dark:ring-white/[0.06] shadow-[0_1px_3px_0_rgb(0_0_0/_0.08),0_1px_2px_-1px_rgb(0_0_0/_0.08)] dark:shadow-[0_1px_3px_0_rgb(0_0_0/_0.3)] overflow-hidden transition-colors duration-300">
 
       {/* ── Header ───────────────────────────────────────────── */}
-      <div className="px-4 py-3 bg-slate-50/50 dark:bg-slate-900/50 border-b border-slate-200 dark:border-slate-800">
+      <div className="px-4 py-3 bg-slate-50/30 dark:bg-white/[0.02] border-b border-slate-100 dark:border-white/[0.06]">
         <div className="flex items-center justify-between">
           <div className="flex items-center gap-1.5 text-slate-700 dark:text-slate-200 font-semibold text-sm">
             <Filter className="h-3.5 w-3.5 text-slate-400" />
@@ -294,7 +294,7 @@ export const Filters: React.FC<FiltersProps> = ({
       </div>
 
       {/* ── Footer: result count ─────────────────────────────── */}
-      <div className="px-4 py-2.5 bg-slate-50 dark:bg-slate-900/50 border-t border-slate-200 dark:border-slate-800 text-center">
+      <div className="px-4 py-2.5 bg-slate-50/30 dark:bg-white/[0.02] border-t border-slate-100 dark:border-white/[0.06] text-center">
         <span className="text-xs text-slate-500 dark:text-slate-400">
           <span className="font-bold text-slate-900 dark:text-slate-100">{resultCount.toLocaleString()}</span> results
         </span>
