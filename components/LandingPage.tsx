@@ -47,7 +47,7 @@ const HeroCard: React.FC<{ mode: 'cheap' | 'real' }> = ({ mode }) => (
           </div>
           <div className="flex justify-between">
             <span className="text-slate-400">Type</span>
-            <span className="text-purple-400">Spot</span>
+            <span className="text-amber-400">Spot</span>
           </div>
           <div className="border-t border-ink-border pt-2 text-slate-500 italic text-[10px]">
             Looks great. But...
@@ -65,7 +65,7 @@ const HeroCard: React.FC<{ mode: 'cheap' | 'real' }> = ({ mode }) => (
           </div>
           <div className="flex justify-between items-center">
             <span className="text-slate-400">Storage</span>
-            <span className="flex items-center gap-1 text-orange-400 font-semibold">
+            <span className="flex items-center gap-1 text-amber-400 font-semibold">
               <AlertTriangle className="h-3 w-3" /> billed even stopped
             </span>
           </div>
