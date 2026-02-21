@@ -199,12 +199,14 @@ const ComparisonPage: React.FC<{
   );
 
   // ── Value Scores (normalized 0–100) ──────────────────────────────────────
+  // Depends on filteredData (not processedData) — sort order doesn't change
+  // scores, so we avoid recomputing on every sort click.
   const valueScores = useMemo(() => {
     const map = new Map<string, ValueScoreEntry>();
     const results: { id: string; model: string; raw: number | null; tflops: number; hasTflops: boolean }[] = [];
     let maxRaw = 0;
 
-    for (const item of processedData) {
+    for (const item of filteredData) {
       const vs = getValueScoreRaw(item);
       results.push({ id: item.id, model: item.model, raw: vs.raw, tflops: vs.tflops, hasTflops: vs.hasTflops });
       if (vs.raw !== null && vs.raw > maxRaw) maxRaw = vs.raw;
@@ -224,7 +226,7 @@ const ComparisonPage: React.FC<{
       map.set(id, { normalized, raw, tflops, isTopValue });
     }
     return map;
-  }, [processedData]);
+  }, [filteredData]);
 
   const bestPicks = useMemo(() => {
     if (!data.length) return null;
