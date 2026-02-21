@@ -201,7 +201,7 @@ export const GPUComparisonTable: React.FC<Props> = ({
   );
 
   return (
-    <div className="bg-white dark:bg-ink-card rounded-xl ring-1 ring-black/[0.06] dark:ring-white/[0.06] overflow-hidden flex flex-col shadow-[0_1px_3px_0_rgb(0_0_0/_0.08),0_1px_2px_-1px_rgb(0_0_0/_0.08)] dark:shadow-[0_1px_3px_0_rgb(0_0_0/_0.3)]">
+    <div className="bg-white dark:bg-ink-card rounded-xl border border-slate-200/60 dark:border-ink-border overflow-hidden flex flex-col shadow-sm dark:shadow-[0_1px_3px_0_rgb(0_0_0/_0.3)]">
 
       {/* ── Mobile cards ──────────────────────────────────────────────────── */}
       <div className="block md:hidden">
