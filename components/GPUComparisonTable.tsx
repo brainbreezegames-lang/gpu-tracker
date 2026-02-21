@@ -174,7 +174,7 @@ export const GPUComparisonTable: React.FC<Props> = ({
   // ── Empty state ─────────────────────────────────────────────────────────────
   if (data.length === 0) {
     return (
-      <div className="bg-white dark:bg-ink-card rounded-xl ring-1 ring-black/[0.06] dark:ring-white/[0.06] shadow-sm py-16 px-6 text-center flex flex-col items-center justify-center">
+      <div className="bg-white dark:bg-ink-card rounded-xl border border-slate-200/60 dark:border-ink-border shadow-sm py-16 px-6 text-center flex flex-col items-center justify-center">
         <div className="h-12 w-12 bg-slate-50 dark:bg-white/5 rounded-full flex items-center justify-center mb-4">
           <Server className="h-6 w-6 text-slate-300 dark:text-slate-600" />
         </div>
