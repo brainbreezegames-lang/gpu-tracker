@@ -545,7 +545,7 @@ const Dashboard: React.FC = () => {
           <Route path="/recipes"  element={<WorkloadRecipesPage data={data} isLoading={isLoading} />} />
           <Route path="/pricing"  element={
             <LandingPage
-              onStartPro={() => alert('Pro is coming soon! Join the waitlist.')}
+              onStartPro={() => document.getElementById('pricing')?.scrollIntoView({ behavior: 'smooth' })}
               onTryDemo={() => setActiveTab('comparison')}
             />
           } />
