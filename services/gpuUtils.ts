@@ -5,6 +5,7 @@ const GPU_TFLOPS_TABLE: [RegExp, number][] = [
   [/GB200/i,           10000],   // GB200 NVL72 — 10 PFLOPS FP8 aggregate
   [/B300/i,             9000],   // Blackwell B300 — estimated
   [/B200/i,             4500],
+  [/GH200/i,             989],   // Grace Hopper — H100 GPU die, 96 GB HBM3e
   [/H200/i,             1979],
   [/H100.*SXM/i,        1979],
   [/H100.*NVL/i,        1979],
