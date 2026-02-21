@@ -541,7 +541,7 @@ export const LandingPage: React.FC<LandingPageProps> = ({ onStartPro, onTryDemo 
                   'Tags + exports for accountability',
                 ].map((f) => (
                   <li key={f} className="flex items-start gap-2 text-sm text-slate-600 dark:text-slate-400">
-                    <CheckCircle className="h-4 w-4 text-sky-500 shrink-0 mt-0.5" />
+                    <CheckCircle className="h-4 w-4 text-blue-500 shrink-0 mt-0.5" />
                     {f}
                   </li>
                 ))}
