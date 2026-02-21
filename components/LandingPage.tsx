@@ -143,7 +143,7 @@ export const LandingPage: React.FC<LandingPageProps> = ({ onStartPro, onTryDemo 
         </div>
 
         <div className="relative max-w-[1200px] mx-auto px-6 lg:px-12 py-24 w-full">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 sm:gap-12 lg:gap-16 items-center">
 
             {/* Left — Copy */}
             <div>
@@ -154,7 +154,7 @@ export const LandingPage: React.FC<LandingPageProps> = ({ onStartPro, onTryDemo 
               </div>
 
               {/* H1 */}
-              <h1 className="font-display text-6xl lg:text-7xl font-black leading-[0.9] tracking-tight text-white mb-6">
+              <h1 className="font-display text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-black leading-[0.9] tracking-tight text-white mb-6">
                 The GPU<br />
                 price is<br />
                 <span className="text-brand-400 relative">

@@ -335,7 +335,7 @@ export const ProModal: React.FC<ProModalProps> = ({
       <div className="absolute inset-0 bg-ink/80 backdrop-blur-sm" />
 
       {/* Panel */}
-      <div className="relative bg-white dark:bg-ink-card rounded-2xl border border-slate-200 dark:border-ink-border shadow-2xl w-full max-w-md max-h-[90vh] overflow-y-auto">
+      <div className="relative bg-white dark:bg-ink-card rounded-2xl border border-slate-200 dark:border-ink-border shadow-2xl w-full max-w-[calc(100vw-32px)] sm:max-w-md max-h-[90vh] overflow-y-auto">
 
         {/* Close */}
         <button
@@ -345,7 +345,7 @@ export const ProModal: React.FC<ProModalProps> = ({
           <X className="h-4 w-4" />
         </button>
 
-        <div className="p-6">
+        <div className="p-4 sm:p-6">
           {/* Icon + Title */}
           <div className={`inline-flex p-3 rounded-xl ${cfg.iconBg} mb-4`}>
             <Icon className={`h-6 w-6 ${cfg.iconColor}`} />
@@ -361,7 +361,7 @@ export const ProModal: React.FC<ProModalProps> = ({
           {/* Feature bullets */}
           <ul className="space-y-2 mb-4">
             {cfg.bullets.map((b) => (
-              <li key={b} className="flex items-start gap-2 text-sm text-slate-600 dark:text-slate-300">
+              <li key={b} className="flex items-start gap-2 text-xs sm:text-sm text-slate-600 dark:text-slate-300">
                 <CheckCircle className="h-4 w-4 text-brand-500 shrink-0 mt-0.5" />
                 {b}
               </li>

@@ -43,7 +43,7 @@ export const TMCPanel: React.FC<TMCPanelProps> = ({ item, onClose }) => {
       <div className="absolute inset-0 bg-black/50 backdrop-blur-sm" />
 
       {/* Panel */}
-      <div className="relative slide-in-right w-full max-w-md h-full bg-white dark:bg-ink-card border-l border-slate-200 dark:border-ink-border overflow-y-auto custom-scrollbar flex flex-col shadow-2xl">
+      <div className="relative slide-in-right w-full max-w-[100vw] sm:max-w-md h-full bg-white dark:bg-ink-card border-l border-slate-200 dark:border-ink-border overflow-y-auto custom-scrollbar flex flex-col shadow-2xl">
 
         {/* Header */}
         <div className="sticky top-0 z-10 bg-white dark:bg-ink-card border-b border-slate-100 dark:border-ink-border px-5 py-4 flex items-start justify-between">
@@ -98,7 +98,7 @@ export const TMCPanel: React.FC<TMCPanelProps> = ({ item, onClose }) => {
 
             <div>
               <div className="flex justify-between text-sm mb-2">
-                <span className="font-medium text-slate-700 dark:text-slate-300">Outbound Data <span className="font-normal text-slate-400">(egress)</span></span>
+                <span className="font-medium text-slate-700 dark:text-slate-300">Egress <span className="hidden sm:inline font-normal text-slate-400">(outbound)</span></span>
                 <span className="font-bold font-mono text-brand-600 dark:text-brand-400">{egressGB} GB</span>
               </div>
               <input
@@ -253,7 +253,7 @@ export const TMCPanel: React.FC<TMCPanelProps> = ({ item, onClose }) => {
             rel="noreferrer"
             className="flex w-full items-center justify-center gap-2 rounded-xl bg-brand-500 hover:bg-brand-400 dark:bg-brand-500 dark:hover:bg-brand-400 px-5 py-3.5 text-sm font-bold text-white shadow-glow transition-all active:scale-[0.98] hover:shadow-glow-dark"
           >
-            Reserve at This Price — {item.provider} <ExternalLink className="h-4 w-4" />
+            <span className="hidden sm:inline">Reserve at This Price —</span><span className="sm:hidden">Reserve —</span> {item.provider} <ExternalLink className="h-4 w-4" />
           </a>
           <div className="text-[11px] text-slate-400 dark:text-slate-500 text-center mt-2 font-mono">
             ${item.pricePerHour.toFixed(2)}/hr · ${tmc.totalMonthly.toFixed(0)}/mo true cost
