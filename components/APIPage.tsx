@@ -41,9 +41,9 @@ export const APIPage: React.FC = () => (
     <Section title="Response Schema" icon={Database}>
       <CodeBlock>{`{
   "lastUpdated": "2026-02-21T11:29:22Z",
-  "count": 12824,
+  "count": 5025,
   "providerCount": 18,
-  "modelCount": 55,
+  "modelCount": 66,
   "data": [{
     "id":           "uuid-v5",
     "provider":     "Vast.ai",
