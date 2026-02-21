@@ -142,7 +142,7 @@ export const LandingPage: React.FC<LandingPageProps> = ({ onStartPro, onTryDemo 
           <div className="absolute inset-0 bg-[repeating-linear-gradient(0deg,transparent_0px,transparent_3px,rgba(0,0,0,0.015)_3px,rgba(0,0,0,0.015)_4px)]" />
         </div>
 
-        <div className="relative max-w-[1200px] mx-auto px-6 lg:px-12 py-24 w-full">
+        <div className="relative max-w-[1200px] mx-auto px-4 sm:px-6 lg:px-12 py-16 sm:py-24 w-full">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 sm:gap-12 lg:gap-16 items-center">
 
             {/* Left — Copy */}
@@ -150,7 +150,7 @@ export const LandingPage: React.FC<LandingPageProps> = ({ onStartPro, onTryDemo 
               {/* Eyebrow */}
               <div className="inline-flex items-center gap-2 border border-brand-400/30 bg-brand-400/10 rounded-full px-3 py-1.5 mb-8">
                 <span className="animate-live h-1.5 w-1.5 rounded-full bg-brand-400" />
-                <span className="text-[10px] font-bold font-mono text-brand-400 uppercase tracking-widest">12,000+ instances tracked · Updated every 6 hours</span>
+                <span className="text-[9px] sm:text-[10px] font-bold font-mono text-brand-400 uppercase tracking-widest">12,000+ instances · <span className="hidden sm:inline">Updated </span>Every 6h</span>
               </div>
 
               {/* H1 */}
@@ -180,13 +180,13 @@ export const LandingPage: React.FC<LandingPageProps> = ({ onStartPro, onTryDemo 
               <div className="flex flex-col sm:flex-row gap-3">
                 <button
                   onClick={onStartPro}
-                  className="flex items-center justify-center gap-2 px-7 py-4 rounded-xl text-sm font-bold pro-gradient text-white shadow-glow hover:shadow-glow-dark hover:opacity-90 transition-all active:scale-[0.98]"
+                  className="flex items-center justify-center gap-2 px-5 sm:px-7 py-3.5 sm:py-4 rounded-xl text-sm font-bold pro-gradient text-white shadow-glow hover:shadow-glow-dark hover:opacity-90 transition-all active:scale-[0.98]"
                 >
-                  Start Pro — alerts + true cost <ArrowRight className="h-4 w-4" />
+                  <span className="hidden sm:inline">Start Pro — alerts + true cost</span><span className="sm:hidden">Start Pro</span> <ArrowRight className="h-4 w-4" />
                 </button>
                 <button
                   onClick={onTryDemo}
-                  className="flex items-center justify-center gap-2 px-7 py-4 rounded-xl text-sm font-semibold border border-white/10 text-white hover:bg-white/5 transition-all"
+                  className="flex items-center justify-center gap-2 px-5 sm:px-7 py-3.5 sm:py-4 rounded-xl text-sm font-semibold border border-white/10 text-white hover:bg-white/5 transition-all"
                 >
                   Try Predictable Mode →
                 </button>
@@ -245,7 +245,7 @@ export const LandingPage: React.FC<LandingPageProps> = ({ onStartPro, onTryDemo 
             </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-3 sm:gap-4 md:gap-6">
             {[
               {
                 icon: AlertTriangle,
