@@ -16,7 +16,7 @@ import { ProModal, ProModalVariant } from './components/ProModal';
 import { fetchGPUData, fetchPriceHistory, filterData, sortData } from './services/gpuDataService';
 import {
   exportToCSV, encodeFiltersToHash, decodeFiltersFromHash,
-  getPredictableScore, getProcurementFriction, getValueScoreRaw, getFreshness,
+  getProcurementFriction, getValueScoreRaw, getFreshness,
 } from './services/gpuUtils';
 import { FilterState, GPUInstance, PriceHistory, SortState, Commitment, Availability } from './types';
 import type { ValueScoreEntry } from './components/GPUComparisonTable';
@@ -46,32 +46,31 @@ const DEFAULT_FILTERS: FilterState = {
 // ── Ranking Mode ──────────────────────────────────────────────────────────────
 type RankMode = 'cheapest' | 'predictable' | 'fast';
 
+// applyRankMode is a pure VIEW FILTER — it never overrides column sorting.
+// sortData() always runs first; applyRankMode only reduces the visible set.
+// This keeps column-header sorting working in every mode.
 function applyRankMode(data: GPUInstance[], mode: RankMode): GPUInstance[] {
   if (mode === 'cheapest') return data;
 
   if (mode === 'predictable') {
-    // Only On-Demand instances — spot has interruption risk that defeats predictability.
-    // Sort ascending by True Monthly Cost × risk multiplier (lower = more predictable).
-    return [...data]
-      .filter((d) => d.commitment !== Commitment.Spot)
-      .sort((a, b) => getPredictableScore(a) - getPredictableScore(b));
+    // Hide spot instances — interruption risk defeats reliability.
+    // Column sorting still works on the resulting on-demand subset.
+    return data.filter((d) => d.commitment !== Commitment.Spot);
   }
 
   if (mode === 'fast') {
-    // Only Self-serve providers — no quota requests or waitlists needed.
-    // Sorted by lowest hourly price within that set.
-    return [...data]
-      .filter((d) => getProcurementFriction(d.provider, d.model).level === 'Self-serve')
-      .sort((a, b) => a.pricePerHour - b.pricePerHour);
+    // Hide providers that require quota requests or waitlist approval.
+    // Column sorting still works on the self-serve subset.
+    return data.filter((d) => getProcurementFriction(d.provider, d.model).level === 'Self-serve');
   }
 
   return data;
 }
 
 const RANK_MODES: { id: RankMode; label: string; icon: React.FC<{ className?: string }>; tooltip: string }[] = [
-  { id: 'cheapest',    label: 'Cheapest',    icon: DollarSign, tooltip: 'All instances sorted by lowest $/hr.' },
-  { id: 'predictable', label: 'Predictable', icon: Shield,     tooltip: 'On-demand only — no spot interruptions. Sorted by true monthly cost including storage + risk.' },
-  { id: 'fast',        label: 'Fast Start',  icon: Clock,      tooltip: 'Self-serve providers only — no quota requests or waitlists. Sorted by lowest price.' },
+  { id: 'cheapest',    label: 'Cheapest',    icon: DollarSign, tooltip: 'All instances — sort by any column.' },
+  { id: 'predictable', label: 'Predictable', icon: Shield,     tooltip: 'On-demand only — spot instances hidden. No interruption risk.' },
+  { id: 'fast',        label: 'Fast Start',  icon: Clock,      tooltip: 'Self-serve providers only — no quota requests or waitlists needed.' },
 ];
 
 // ── Workload Presets ──────────────────────────────────────────────────────────
