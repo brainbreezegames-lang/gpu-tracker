@@ -150,7 +150,7 @@ export const LandingPage: React.FC<LandingPageProps> = ({ onStartPro, onTryDemo 
               {/* Eyebrow */}
               <div className="inline-flex items-center gap-2 border border-brand-400/30 bg-brand-400/10 rounded-full px-3 py-1.5 mb-8">
                 <span className="animate-live h-1.5 w-1.5 rounded-full bg-brand-400" />
-                <span className="text-[9px] sm:text-[10px] font-bold font-mono text-brand-400 uppercase tracking-widest">12,000+ instances · <span className="hidden sm:inline">Updated </span>Every 6h</span>
+                <span className="text-[9px] sm:text-[10px] font-bold font-mono text-brand-400 uppercase tracking-widest">5,000+ instances · <span className="hidden sm:inline">Updated </span>Every 6h</span>
               </div>
 
               {/* H1 */}
@@ -173,7 +173,7 @@ export const LandingPage: React.FC<LandingPageProps> = ({ onStartPro, onTryDemo 
 
               {/* Micro-proof */}
               <div className="text-xs font-mono text-slate-500 mb-8">
-                Updated every 6h &nbsp;·&nbsp; 12,000+ instances &nbsp;·&nbsp; Runs in your browser
+                Updated every 6h &nbsp;·&nbsp; 5,000+ instances &nbsp;·&nbsp; Runs in your browser
               </div>
 
               {/* CTAs */}
@@ -530,7 +530,7 @@ export const LandingPage: React.FC<LandingPageProps> = ({ onStartPro, onTryDemo 
               <div className="font-display text-lg font-bold text-slate-900 dark:text-white mb-1">Teams</div>
               <div className="text-sm text-slate-500 dark:text-slate-400 mb-4">For teams sharing GPU spend (and blame).</div>
               <div className="flex items-baseline gap-1 mb-5">
-                <span className="text-3xl font-bold font-mono text-slate-900 dark:text-white">$299</span>
+                <span className="text-3xl font-bold font-mono text-slate-900 dark:text-white">$199</span>
                 <span className="text-slate-400 text-sm">/mo</span>
               </div>
               <ul className="space-y-2 flex-1 mb-6">
@@ -558,7 +558,7 @@ export const LandingPage: React.FC<LandingPageProps> = ({ onStartPro, onTryDemo 
             <GatedRow label="💾 Save this search" onUpgrade={onStartPro} />
             <GatedRow label="🔔 Create price alert for H100 ≤ $2.00/hr" onUpgrade={onStartPro} />
             <GatedRow label="📊 View 30-day price history" onUpgrade={onStartPro} />
-            <GatedRow label="📥 Export full 12,000+ row CSV" onUpgrade={onStartPro} />
+            <GatedRow label="📥 Export full 5,000+ row CSV" onUpgrade={onStartPro} />
           </div>
         </div>
       </section>
