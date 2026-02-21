@@ -323,7 +323,7 @@ const ComparisonPage: React.FC<{
                   : 'border-slate-200 dark:border-ink-border bg-white dark:bg-ink-card text-slate-600 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-white/5'
               }`}
             >
-              <Icon className="h-3 w-3 shrink-0" />{label}
+              <Icon className="h-3 w-3 shrink-0" /><span className="hidden sm:inline">{label}</span>
             </button>
           </Tooltip>
         ))}
@@ -421,7 +421,7 @@ const ComparisonPage: React.FC<{
       )}
 
       {/* ── Main grid: Filters + Table ───────────────────────── */}
-      <div className="grid grid-cols-1 lg:grid-cols-12 gap-5 lg:items-start">
+      <div className="grid grid-cols-1 lg:grid-cols-12 gap-3 sm:gap-4 lg:gap-5 lg:items-start">
         <aside className="lg:col-span-3 lg:sticky lg:top-20 lg:self-start">
           <div className="lg:max-h-[calc(100vh-5.5rem)] lg:overflow-y-scroll overscroll-contain custom-scrollbar pb-4">
           <Filters
