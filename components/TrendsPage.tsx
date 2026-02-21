@@ -405,7 +405,7 @@ export const TrendsPage: React.FC<Props> = ({ data, isLoading }) => {
                 value={count}
                 max={maxProvCount}
                 subLabel={`${count} · from $${minPrice.toFixed(2)}`}
-                color="bg-indigo-500 dark:bg-indigo-400"
+                color="bg-slate-500 dark:bg-slate-400"
               />
             ))}
           </div>
