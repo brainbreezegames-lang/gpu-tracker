@@ -258,12 +258,12 @@ export const LandingPage: React.FC<LandingPageProps> = ({ onStartPro, onTryDemo 
               },
               {
                 icon: Clock,
-                iconBg: 'bg-orange-50 dark:bg-orange-500/10',
-                iconColor: 'text-orange-500',
+                iconBg: 'bg-amber-50 dark:bg-amber-500/10',
+                iconColor: 'text-amber-500',
                 title: 'Stopping compute doesn\'t stop charges.',
                 desc: 'Beginners get hit by storage charges even after shutting down pods. The GPU stops. The bill doesn\'t.',
                 stat: 'Most common beginner trap',
-                statColor: 'text-orange-600 dark:text-orange-400',
+                statColor: 'text-amber-600 dark:text-amber-400',
               },
               {
                 icon: Zap,
