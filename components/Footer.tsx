@@ -4,7 +4,7 @@ export const Footer: React.FC = () => {
   return (
     <footer className="bg-white dark:bg-slate-900 border-t border-slate-200 dark:border-slate-800 mt-12 transition-colors duration-300">
       <div className="max-w-7xl mx-auto py-12 px-4 sm:px-6 md:flex md:items-center md:justify-between lg:px-8">
-        <div className="flex justify-center space-x-6 md:order-2">
+        <div className="flex justify-center gap-4 sm:gap-6 flex-wrap md:order-2">
           <a href="#" className="text-slate-400 hover:text-slate-500 dark:hover:text-slate-300">About</a>
           <a href="#" className="text-slate-400 hover:text-slate-500 dark:hover:text-slate-300">Privacy</a>
           <a href="#" className="text-slate-400 hover:text-slate-500 dark:hover:text-slate-300">Terms</a>
