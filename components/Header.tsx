@@ -36,7 +36,7 @@ export const Header: React.FC<HeaderProps> = ({ activeTab, setActiveTab }) => {
   };
 
   return (
-    <header className="bg-white/90 dark:bg-ink/90 backdrop-blur-md border-b border-slate-200 dark:border-ink-border sticky top-0 z-50 transition-colors duration-300">
+    <header className="bg-white/90 dark:bg-ink/90 backdrop-blur-md border-b border-slate-200/60 dark:border-ink-border sticky top-0 z-50 transition-colors duration-300">
       <div className="max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-14">
 
