@@ -330,8 +330,8 @@ export const TrendsPage: React.FC<Props> = ({ data, isLoading }) => {
         <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
           <StatCard label="Cheapest H100" value={stats.h100Min ? `$${stats.h100Min.toFixed(2)}` : 'N/A'} sub="/hr" icon={Award} color="text-emerald-500" />
           <StatCard label="Cheapest H200" value={stats.h200Min ? `$${stats.h200Min.toFixed(2)}` : 'N/A'} sub="/hr" icon={TrendingDown} color="text-blue-500" />
-          <StatCard label="Cheapest A100" value={stats.a100Min ? `$${stats.a100Min.toFixed(2)}` : 'N/A'} sub="/hr" icon={Zap} color="text-purple-500" />
-          <StatCard label="Avg Price" value={`$${stats.avgPrice.toFixed(2)}`} sub={`${stats.spotCount.toLocaleString()} spot`} icon={DollarSign} color="text-orange-500" />
+          <StatCard label="Cheapest A100" value={stats.a100Min ? `$${stats.a100Min.toFixed(2)}` : 'N/A'} sub="/hr" icon={Zap} color="text-amber-500" />
+          <StatCard label="Avg Price" value={`$${stats.avgPrice.toFixed(2)}`} sub={`${stats.spotCount.toLocaleString()} spot`} icon={DollarSign} color="text-slate-500" />
         </div>
       )}
 
