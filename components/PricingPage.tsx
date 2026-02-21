@@ -81,7 +81,7 @@ const PLANS: Plan[] = [
     price: '$199',
     period: '/mo',
     badge: 'For orgs',
-    badgeClass: 'bg-sky-100 text-sky-700 dark:bg-sky-500/20 dark:text-sky-300',
+    badgeClass: 'bg-blue-100 text-blue-700 dark:bg-blue-500/20 dark:text-blue-300',
     description: 'Procurement tooling for MLOps teams managing cloud GPU budgets.',
     cta: 'Contact sales',
     ctaClass: 'border border-slate-200 dark:border-ink-border text-slate-700 dark:text-slate-200 hover:bg-slate-50 dark:hover:bg-white/5',
