@@ -16,7 +16,7 @@ import { ProModal, ProModalVariant } from './components/ProModal';
 import { fetchGPUData, fetchPriceHistory, filterData, sortData } from './services/gpuDataService';
 import {
   exportToCSV, encodeFiltersToHash, decodeFiltersFromHash,
-  getPredictableScore, getFrictionScore, getValueScoreRaw, getFreshness,
+  getPredictableScore, getProcurementFriction, getValueScoreRaw, getFreshness,
 } from './services/gpuUtils';
 import { FilterState, GPUInstance, PriceHistory, SortState, Commitment, Availability } from './types';
 import type { ValueScoreEntry } from './components/GPUComparisonTable';
