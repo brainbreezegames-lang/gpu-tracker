@@ -168,7 +168,7 @@ export const LandingPage: React.FC<LandingPageProps> = ({ onStartPro, onTryDemo 
                 <strong className="text-white">true monthly cost</strong>,{' '}
                 <strong className="text-white">spot volatility</strong>, and{' '}
                 <strong className="text-white">how hard it is to actually get the GPU</strong>{' '}
-                — across 22 providers.
+                — across 19+ providers.
               </p>
 
               {/* Micro-proof */}
@@ -476,7 +476,7 @@ export const LandingPage: React.FC<LandingPageProps> = ({ onStartPro, onTryDemo 
               </div>
               <ul className="space-y-2 flex-1 mb-6">
                 {[
-                  'Search across 22 providers',
+                  'Search across 19+ providers',
                   'Filters: GPU, VRAM, region, commitment',
                   'Live deal table + comparison',
                   'Basic "best deal" browsing',

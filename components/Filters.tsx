@@ -134,7 +134,7 @@ export const Filters: React.FC<FiltersProps> = ({
           return (
             <div className="flex items-center gap-1 text-[10px] text-slate-400 dark:text-slate-500 mt-1">
               <span className={`h-1 w-1 rounded-full ${f.dotColor}`} />
-              {Math.max(availableProviders.length, 22)} providers · {f.label}
+              {availableProviders.length} providers · {f.label}
             </div>
           );
         })()}
