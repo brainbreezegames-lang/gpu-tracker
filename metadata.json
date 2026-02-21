@@ -1,0 +1,5 @@
+{
+  "name": "GPU Price Tracker",
+  "description": "Real-time comparison engine for GPU cloud computing instances. Compare prices across providers like AWS, Lambda, RunPod, and more.",
+  "requestFramePermissions": []
+}

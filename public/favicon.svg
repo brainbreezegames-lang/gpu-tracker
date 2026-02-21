@@ -1,0 +1,29 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" fill="none">
+  <!-- Outer chip body -->
+  <rect x="6" y="6" width="20" height="20" rx="3" fill="#2563eb"/>
+  <!-- Chip inner grid -->
+  <rect x="10" y="10" width="12" height="12" rx="1.5" fill="#1d4ed8"/>
+  <!-- Grid lines -->
+  <line x1="14" y1="10" x2="14" y2="22" stroke="#3b82f6" stroke-width="0.8"/>
+  <line x1="18" y1="10" x2="18" y2="22" stroke="#3b82f6" stroke-width="0.8"/>
+  <line x1="10" y1="14" x2="22" y2="14" stroke="#3b82f6" stroke-width="0.8"/>
+  <line x1="10" y1="18" x2="22" y2="18" stroke="#3b82f6" stroke-width="0.8"/>
+  <!-- Center core highlight -->
+  <rect x="13" y="13" width="6" height="6" rx="1" fill="#60a5fa" opacity="0.9"/>
+  <!-- Pins - top -->
+  <rect x="10" y="3" width="2" height="3" rx="0.5" fill="#2563eb"/>
+  <rect x="15" y="3" width="2" height="3" rx="0.5" fill="#2563eb"/>
+  <rect x="20" y="3" width="2" height="3" rx="0.5" fill="#2563eb"/>
+  <!-- Pins - bottom -->
+  <rect x="10" y="26" width="2" height="3" rx="0.5" fill="#2563eb"/>
+  <rect x="15" y="26" width="2" height="3" rx="0.5" fill="#2563eb"/>
+  <rect x="20" y="26" width="2" height="3" rx="0.5" fill="#2563eb"/>
+  <!-- Pins - left -->
+  <rect x="3" y="10" width="3" height="2" rx="0.5" fill="#2563eb"/>
+  <rect x="3" y="15" width="3" height="2" rx="0.5" fill="#2563eb"/>
+  <rect x="3" y="20" width="3" height="2" rx="0.5" fill="#2563eb"/>
+  <!-- Pins - right -->
+  <rect x="26" y="10" width="3" height="2" rx="0.5" fill="#2563eb"/>
+  <rect x="26" y="15" width="3" height="2" rx="0.5" fill="#2563eb"/>
+  <rect x="26" y="20" width="3" height="2" rx="0.5" fill="#2563eb"/>
+</svg>
