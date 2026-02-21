@@ -192,7 +192,7 @@ export const GPUModelPage: React.FC<Props> = ({ data, isLoading }) => {
                   <td className="px-4 py-3">
                     <span className={`text-[10px] font-semibold px-1.5 py-0.5 rounded ${
                       inst.commitment === 'Spot'
-                        ? 'bg-purple-100 text-purple-700 dark:bg-purple-900/30 dark:text-purple-300'
+                        ? 'bg-amber-50 text-amber-700 dark:bg-amber-500/10 dark:text-amber-400'
                         : 'bg-slate-100 text-slate-600 dark:bg-slate-800 dark:text-slate-300'
                     }`}>
                       {inst.commitment}
