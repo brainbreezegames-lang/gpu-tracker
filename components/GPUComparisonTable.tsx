@@ -375,6 +375,7 @@ export const GPUComparisonTable: React.FC<Props> = ({
                       >
                         {item.instanceName ?? <span className="invisible">–</span>}
                       </span>
+                      </div>
                     </div>
                   </td>
 
