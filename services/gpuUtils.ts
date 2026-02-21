@@ -89,6 +89,13 @@ const TRUST_MAP: Record<string, TrustInfo> = {
   'HotAisle':     { tier: 'Emerging',    score: 2, note: 'GPU cloud, smaller provider'                                },
   'CloudRift':    { tier: 'Emerging',    score: 2, note: 'Specialized GPU cloud, newer provider'                      },
   'Verda':        { tier: 'Emerging',    score: 2, note: 'GPU cloud, newer provider'                                  },
+  'Scaleway':     { tier: 'Established', score: 3, note: 'European cloud, EU data residency, H100/L4 GPU instances'   },
+  'Hyperstack':   { tier: 'Emerging',    score: 2, note: 'UK GPU cloud, NVIDIA partner, growing footprint'            },
+  'Genesis Cloud':{ tier: 'Emerging',    score: 2, note: 'Iceland-based, green energy GPU cloud'                      },
+  'OVHcloud':     { tier: 'Established', score: 3, note: 'Major EU cloud, bare metal + VM GPU, GDPR-compliant'        },
+  'CoreWeave':    { tier: 'Established', score: 4, note: 'NVIDIA-backed GPU cloud, enterprise SLA, H100 specialist'   },
+  'Crusoe':       { tier: 'Emerging',    score: 2, note: 'Stranded energy GPU cloud, US-based, H100 focus'            },
+  'Latitude.sh':  { tier: 'Emerging',    score: 2, note: 'Bare metal GPU cloud, self-serve, global locations'         },
 };
 
 export function getProviderTrust(provider: string): TrustInfo {
