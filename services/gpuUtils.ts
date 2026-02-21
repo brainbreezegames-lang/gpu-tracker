@@ -21,7 +21,12 @@ const GPU_TFLOPS_TABLE: [RegExp, number][] = [
   [/V100.*SXM/i,         112],   // V100 SXM2 is higher than PCIe
   [/V100/i,               62],
   [/T4\b/i,               65],
+  [/RTX[\s_-]?(?:PRO[\s_-]?)?\s*6000\s*(?:Blackwell|Server|WS|S|WK)?/i, 3578], // RTX PRO 6000 Blackwell 96GB
   [/RTX[\s_-]?(?:PRO\s*)?6000\s*Ada/i, 362],  // RTX Pro 6000 Ada ≈ L40S
+  [/RTX[\s_-]?5090/i,    1800],  // Blackwell RTX 5090 (estimated FP8)
+  [/RTX[\s_-]?5080/i,    900],   // Blackwell RTX 5080 (estimated)
+  [/RTX[\s_-]?5070/i,    600],
+  [/RTX[\s_-]?5060/i,    400],
   [/RTX[\s_-]?4090/i,    330],
   [/RTX[\s_-]?4080/i,    242],
   [/RTX[\s_-]?4070/i,    165],

@@ -236,10 +236,7 @@ export const GPUComparisonTable: React.FC<Props> = ({
                   </div>
                 </div>
                 {/* Specs row */}
-                <div className="flex items-center gap-3 mb-3 text-xs text-slate-500 dark:text-slate-400">
-                  <span>{item.vram * item.gpuCount}GB VRAM</span>
-                  <span className="text-slate-300 dark:text-slate-600">·</span>
-                  <span>{item.region}</span>
+                <div className="flex items-center gap-1.5 sm:gap-3 mb-3 text-[11px] sm:text-xs text-slate-500 dark:text-slate-400 flex-wrap">
                   {(() => {
                     const vs = valueScores?.get(item.id);
                     if (vs?.normalized != null) {
