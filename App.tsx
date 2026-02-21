@@ -271,14 +271,14 @@ const ComparisonPage: React.FC<{
         <Search className="absolute left-3.5 top-1/2 -translate-y-1/2 h-4 w-4 text-slate-400 dark:text-slate-500 pointer-events-none" />
         <input
           type="text"
-          value={filters.search}
-          onChange={(e) => setFilters((p) => ({ ...p, search: e.target.value }))}
+          value={searchInput}
+          onChange={(e) => setSearchInput(e.target.value)}
           placeholder="Search GPU, provider, or instance type…"
           className="w-full rounded-xl border border-slate-200 dark:border-ink-border bg-white dark:bg-ink-card shadow-sm pl-10 pr-10 py-2.5 text-sm text-slate-900 dark:text-slate-100 placeholder:text-slate-400 dark:placeholder:text-slate-500 focus:border-slate-400 dark:focus:border-slate-500 focus:ring-1 focus:ring-slate-200 dark:focus:ring-white/10 outline-none transition-all"
         />
-        {filters.search && (
+        {searchInput && (
           <button
-            onClick={() => setFilters((p) => ({ ...p, search: '' }))}
+            onClick={() => { setSearchInput(''); setFilters((p) => ({ ...p, search: '' })); }}
             className="absolute right-3.5 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-600 dark:hover:text-slate-300"
           >
             <X className="h-4 w-4" />
