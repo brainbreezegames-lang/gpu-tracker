@@ -218,12 +218,14 @@ export const GPUComparisonTable: React.FC<Props> = ({
             const isSpot       = item.commitment === Commitment.Spot;
             return (
               <div key={item.id} className="p-4 gpu-row">
-                {/* Top: provider + price */}
+                {/* Top: GPU chip + model + price */}
                 <div className="flex justify-between items-start mb-2">
-                  <div>
-                    <div className="font-bold text-sm text-slate-900 dark:text-white">{item.model}{item.gpuCount > 1 ? ` ×${item.gpuCount}` : ''}</div>
-                    <div className="flex items-center gap-1.5 mt-0.5">
-                      <span className="text-xs text-slate-500 dark:text-slate-400">{item.provider}</span>
+                  <div className="flex items-start gap-2.5 min-w-0">
+                    <GPUChip model={item.model} size="md" />
+                    <div className="min-w-0">
+                      <div className="font-bold text-sm text-slate-900 dark:text-white truncate">{item.model}{item.gpuCount > 1 ? ` ×${item.gpuCount}` : ''}</div>
+                      <div className="flex items-center gap-1.5 mt-0.5">
+                        <span className="text-xs text-slate-500 dark:text-slate-400">{item.provider}</span>
                       {isSpot && <Badge variant="spot" size="xs" />}
                       <span className={`h-2 w-2 rounded-full shrink-0 ${getRiskDotClass(riskVariant)}`} />
                       <Badge variant={riskVariant} size="xs" />
