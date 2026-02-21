@@ -316,7 +316,9 @@ export function getContinuityScore(item: GPUInstance): number {
   if (item.availability === 'Low')        score -= 10;
   if (item.availability === 'Out of Stock') score = 0;
 
-  return Math.max(0, Math.min(100, score));
+  const result = Math.max(0, Math.min(100, score));
+  _continuityCache.set(item.id, result);
+  return result;
 }
 
 export interface ContinuityLabel {
@@ -559,14 +561,20 @@ export interface ValueScoreResult {
 }
 
 export function getValueScoreRaw(item: GPUInstance): ValueScoreResult {
+  const cached = _valueScoreCache.get(item.id);
+  if (cached) return cached;
   const tflops = getGPUTFLOPS(item.model);
   if (!tflops || item.pricePerHour <= 0) {
-    return { raw: null, tflops: 0, hasTflops: false };
+    const miss: ValueScoreResult = { raw: null, tflops: 0, hasTflops: false };
+    _valueScoreCache.set(item.id, miss);
+    return miss;
   }
   const continuity = getContinuityScore(item);
   const rawValue = (tflops * item.gpuCount) / item.pricePerHour;
   const adjusted = rawValue * (continuity / 100);
-  return { raw: adjusted, tflops, hasTflops: true };
+  const result: ValueScoreResult = { raw: adjusted, tflops, hasTflops: true };
+  _valueScoreCache.set(item.id, result);
+  return result;
 }
 
 // ── Freshness ────────────────────────────────────────────────────────────────
