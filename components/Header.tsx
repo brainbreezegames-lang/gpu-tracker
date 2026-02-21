@@ -68,8 +68,8 @@ export const Header: React.FC<HeaderProps> = ({ activeTab, setActiveTab }) => {
                 onClick={() => setActiveTab(tab.id)}
                 className={`px-3.5 py-2 text-sm font-medium rounded-lg transition-all ${
                   isActive(tab)
-                    ? 'text-white dark:text-slate-900 bg-slate-900 dark:bg-white border border-slate-900 dark:border-white font-semibold'
-                    : 'text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white hover:bg-slate-50 dark:hover:bg-white/5 border border-transparent'
+                    ? 'text-white dark:text-brand-400 bg-slate-900 dark:bg-brand-400/10 border border-slate-900 dark:border-brand-400/25 font-semibold'
+                    : 'text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-slate-200 hover:bg-slate-50 dark:hover:bg-white/5 border border-transparent'
                 }`}
               >
                 {tab.label}
@@ -129,7 +129,7 @@ export const Header: React.FC<HeaderProps> = ({ activeTab, setActiveTab }) => {
                 onClick={() => handleTab(tab.id)}
                 className={`flex items-center w-full text-left px-3 py-3 rounded-lg text-sm font-medium transition-all ${
                   isActive(tab)
-                    ? 'bg-slate-900 dark:bg-white text-white dark:text-slate-900 border border-slate-900 dark:border-white font-semibold'
+                    ? 'bg-slate-900 dark:bg-brand-400/10 text-white dark:text-brand-400 border border-slate-900 dark:border-brand-400/25 font-semibold'
                     : 'text-slate-700 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white hover:bg-slate-50 dark:hover:bg-white/5 border border-transparent'
                 }`}
               >
