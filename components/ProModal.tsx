@@ -57,8 +57,8 @@ const VARIANT_CONFIG: Record<ProModalVariant, {
   },
   history: {
     icon: History,
-    iconBg: 'bg-sky-50 dark:bg-sky-500/10',
-    iconColor: 'text-sky-500',
+    iconBg: 'bg-blue-50 dark:bg-blue-500/10',
+    iconColor: 'text-blue-500',
     title: 'View price history',
     subtitle: 'Spot is a moving target. Know if today\'s deal is actually a deal.',
     bullets: [
