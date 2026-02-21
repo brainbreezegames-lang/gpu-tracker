@@ -286,10 +286,20 @@ export function getProviderBilling(provider: string): ProviderBillingInfo {
   };
 }
 
+// ── Per-item computation caches ───────────────────────────────────────────────
+// Keyed by item.id — valid for the lifetime of the loaded dataset.
+// These are module-level so they persist across re-renders but reset on page reload.
+const _continuityCache    = new Map<string, number>();
+const _valueScoreCache    = new Map<string, ValueScoreResult>();
+const _predictableCache   = new Map<string, number>();
+const _frictionCache      = new Map<string, number>();
+
 // ── Continuity Score ──────────────────────────────────────────────────────────
 // Score 0–100: probability of job completion without unexpected interruption.
 
 export function getContinuityScore(item: GPUInstance): number {
+  const cached = _continuityCache.get(item.id);
+  if (cached !== undefined) return cached;
   const trust  = getProviderTrust(item.provider);
   const isSpot = item.commitment === Commitment.Spot;
 
