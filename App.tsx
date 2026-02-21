@@ -47,16 +47,31 @@ const DEFAULT_FILTERS: FilterState = {
 type RankMode = 'cheapest' | 'predictable' | 'fast';
 
 function applyRankMode(data: GPUInstance[], mode: RankMode): GPUInstance[] {
-  if (mode === 'cheapest')    return data;
-  if (mode === 'predictable') return [...data].sort((a, b) => getPredictableScore(a) - getPredictableScore(b));
-  if (mode === 'fast')        return [...data].sort((a, b) => getFrictionScore(a) - getFrictionScore(b));
+  if (mode === 'cheapest') return data;
+
+  if (mode === 'predictable') {
+    // Only On-Demand instances — spot has interruption risk that defeats predictability.
+    // Sort ascending by True Monthly Cost × risk multiplier (lower = more predictable).
+    return [...data]
+      .filter((d) => d.commitment !== Commitment.Spot)
+      .sort((a, b) => getPredictableScore(a) - getPredictableScore(b));
+  }
+
+  if (mode === 'fast') {
+    // Only Self-serve providers — no quota requests or waitlists needed.
+    // Sorted by lowest hourly price within that set.
+    return [...data]
+      .filter((d) => getProcurementFriction(d.provider, d.model).level === 'Self-serve')
+      .sort((a, b) => a.pricePerHour - b.pricePerHour);
+  }
+
   return data;
 }
 
 const RANK_MODES: { id: RankMode; label: string; icon: React.FC<{ className?: string }>; tooltip: string }[] = [
-  { id: 'cheapest',    label: 'Cheapest',     icon: DollarSign, tooltip: 'Sort by lowest hourly price.' },
-  { id: 'predictable', label: 'Predictable',  icon: Shield,     tooltip: 'Prefers on-demand, no surprise costs.' },
-  { id: 'fast',        label: 'Fast Start',   icon: Clock,      tooltip: 'No waitlists or quota requests.' },
+  { id: 'cheapest',    label: 'Cheapest',    icon: DollarSign, tooltip: 'All instances sorted by lowest $/hr.' },
+  { id: 'predictable', label: 'Predictable', icon: Shield,     tooltip: 'On-demand only — no spot interruptions. Sorted by true monthly cost including storage + risk.' },
+  { id: 'fast',        label: 'Fast Start',  icon: Clock,      tooltip: 'Self-serve providers only — no quota requests or waitlists. Sorted by lowest price.' },
 ];
 
 // ── Workload Presets ──────────────────────────────────────────────────────────
