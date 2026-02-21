@@ -256,7 +256,7 @@ const SectionLabel: React.FC<{ title: string; count?: number; tooltip?: string }
 // ── Chip button ───────────────────────────────────────────────────────────────
 
 const chip = (active: boolean) =>
-  `px-3.5 py-2 text-xs rounded-lg font-semibold border transition-colors ${
+  `px-3 sm:px-3.5 py-2.5 sm:py-2 text-xs rounded-lg font-semibold border transition-colors min-h-[36px] ${
     active
       ? 'bg-slate-900 dark:bg-white text-white dark:text-slate-900 border-slate-900 dark:border-white'
       : 'bg-white dark:bg-slate-800 text-slate-600 dark:text-slate-400 border-slate-200 dark:border-slate-700 hover:border-slate-400 dark:hover:border-slate-500'
