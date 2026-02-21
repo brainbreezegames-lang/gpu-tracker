@@ -26,16 +26,22 @@
 
 // ── YOUR AFFILIATE CODES (fill these in after approval) ─────────────────────
 const AFFILIATE_CODES: Record<string, string> = {
-  'RunPod':       '',   // e.g. 'abc123' → appended as ?ref=abc123
-  'Vast.ai':      '',   // e.g. 'your_ref'
-  'Lambda Labs':  '',
-  'TensorDock':   '',
-  'Vultr':        '',
-  'DigitalOcean': '',
-  'CoreWeave':    '',
-  'Nebius':       '',
-  'FluidStack':   '',
-  'Cudo Compute': '',
+  'RunPod':        '',   // e.g. 'abc123' → appended as ?ref=abc123
+  'Vast.ai':       '',   // e.g. 'your_ref'
+  'Lambda Labs':   '',
+  'TensorDock':    '',
+  'Vultr':         '',
+  'DigitalOcean':  '',
+  'CoreWeave':     '',
+  'Nebius':        '',
+  'FluidStack':    '',
+  'Cudo Compute':  '',
+  'Scaleway':      '',
+  'Hyperstack':    '',
+  'Genesis Cloud': '',
+  'OVHcloud':      '',
+  'Crusoe':        '',
+  'Latitude.sh':   '',
 };
 
 // ── URL patterns for each provider ──────────────────────────────────────────
