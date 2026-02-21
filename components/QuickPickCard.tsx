@@ -84,7 +84,7 @@ export const QuickPickCard: React.FC<QuickPickCardProps> = ({
           href={item.link}
           target="_blank"
           rel="noreferrer"
-          className="flex-1 flex items-center justify-center gap-1.5 rounded-lg bg-brand-500 hover:bg-brand-400 px-3 py-2 text-xs font-bold text-white transition-all active:scale-[0.98]"
+          className="flex-1 flex items-center justify-center gap-1.5 rounded-lg bg-emerald-600 hover:bg-emerald-500 px-3 py-2 text-xs font-bold text-white shadow-sm transition-all active:scale-[0.98]"
         >
           Deploy <ExternalLink className="h-3.5 w-3.5" />
         </a>

@@ -251,7 +251,7 @@ export const TMCPanel: React.FC<TMCPanelProps> = ({ item, onClose }) => {
             href={item.link}
             target="_blank"
             rel="noreferrer"
-            className="flex w-full items-center justify-center gap-2 rounded-xl bg-brand-500 hover:bg-brand-400 dark:bg-brand-500 dark:hover:bg-brand-400 px-5 py-3.5 text-sm font-bold text-white shadow-glow transition-all active:scale-[0.98] hover:shadow-glow-dark"
+            className="flex w-full items-center justify-center gap-2 rounded-xl bg-emerald-600 hover:bg-emerald-500 px-5 py-3.5 text-sm font-bold text-white shadow-sm transition-all active:scale-[0.98]"
           >
             <span className="hidden sm:inline">Reserve at This Price —</span><span className="sm:hidden">Reserve —</span> {item.provider} <ExternalLink className="h-4 w-4" />
           </a>
