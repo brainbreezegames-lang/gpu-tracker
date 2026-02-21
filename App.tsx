@@ -307,7 +307,7 @@ const ComparisonPage: React.FC<{
           onClick={() => { setFilters(DEFAULT_FILTERS); setActiveWorkload('all'); }}
           className={`text-xs px-3 py-1.5 rounded-lg border font-semibold transition-all ${
             activeWorkload === 'all'
-              ? 'bg-slate-900 dark:bg-white border-slate-900 dark:border-white text-white dark:text-slate-900'
+              ? 'bg-slate-900 dark:bg-brand-400/10 border-slate-900 dark:border-brand-400/25 text-white dark:text-brand-400'
               : 'border-slate-200 dark:border-ink-border bg-white dark:bg-ink-card text-slate-600 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-white/5'
           }`}
         >
@@ -319,7 +319,7 @@ const ComparisonPage: React.FC<{
               onClick={() => { setFilters(apply()); setActiveWorkload(id); }}
               className={`flex items-center gap-1.5 text-xs px-3 py-1.5 rounded-lg border font-medium transition-all ${
                 activeWorkload === id
-                  ? 'bg-slate-900 dark:bg-white border-slate-900 dark:border-white text-white dark:text-slate-900'
+                  ? 'bg-slate-900 dark:bg-brand-400/10 border-slate-900 dark:border-brand-400/25 text-white dark:text-brand-400'
                   : 'border-slate-200 dark:border-ink-border bg-white dark:bg-ink-card text-slate-600 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-white/5'
               }`}
             >

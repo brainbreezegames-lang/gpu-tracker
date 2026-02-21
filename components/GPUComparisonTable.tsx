@@ -131,7 +131,7 @@ const PaginationControls: React.FC<{
                 <button key={p} onClick={() => setPage(p)}
                   className={`px-2.5 py-1.5 text-xs font-medium rounded-lg border transition-colors ${
                     p === page
-                      ? 'bg-slate-900 dark:bg-white text-white dark:text-slate-900 border-slate-900 dark:border-white'
+                      ? 'bg-slate-900 dark:bg-brand-400/10 text-white dark:text-brand-400 border-slate-900 dark:border-brand-400/25'
                       : 'border-slate-200 dark:border-ink-border bg-white dark:bg-ink-card text-slate-600 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-white/5'
                   }`}>{p}
                 </button>
