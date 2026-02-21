@@ -523,7 +523,7 @@ const Dashboard: React.FC = () => {
   const isTabPage = Object.values(TAB_ROUTES).includes(location.pathname) || location.pathname === '/';
 
   return (
-    <div className="min-h-screen bg-[#f8f9fa] dark:bg-ink flex flex-col font-sans text-slate-900 dark:text-slate-100 transition-colors duration-300">
+    <div className="min-h-screen bg-white dark:bg-ink flex flex-col font-sans text-slate-900 dark:text-slate-100 transition-colors duration-300">
       <Header activeTab={activeTab} setActiveTab={setActiveTab} />
 
       <main className={`flex-grow ${activeTab === 'pricing' && isTabPage ? '' : 'max-w-[1400px] w-full mx-auto px-4 sm:px-6 lg:px-8 py-8'}`}>
