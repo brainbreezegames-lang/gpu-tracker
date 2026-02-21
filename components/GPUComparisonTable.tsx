@@ -13,6 +13,7 @@ import {
 import { affiliateLink } from '../services/affiliateLinks';
 import { Badge, InfoTooltip, Tooltip } from './ui';
 import type { BadgeVariant } from './ui';
+import { GPUChip } from './GPUChip';
 
 export interface ValueScoreEntry {
   normalized: number | null;
