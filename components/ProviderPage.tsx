@@ -158,7 +158,7 @@ export const ProviderPage: React.FC<Props> = ({ data, isLoading }) => {
                 data-track="affiliate_click"
                 data-provider={providerName}
                 data-source="provider_page"
-                className="inline-flex items-center gap-1.5 px-4 py-2 rounded-lg bg-brand-400 hover:bg-brand-500 text-black font-semibold text-sm transition-colors"
+                className="inline-flex items-center gap-1.5 px-4 py-2 rounded-lg bg-emerald-600 hover:bg-emerald-500 text-white font-semibold text-sm shadow-sm transition-colors"
               >
                 <Globe className="h-3.5 w-3.5" />
                 Visit {providerName}
