@@ -173,7 +173,7 @@ export const GPUComparisonTable: React.FC<Props> = ({
   // ── Empty state ─────────────────────────────────────────────────────────────
   if (data.length === 0) {
     return (
-      <div className="bg-white dark:bg-ink-card rounded-xl border border-slate-200 dark:border-ink-border py-16 px-6 text-center flex flex-col items-center justify-center">
+      <div className="bg-white dark:bg-ink-card rounded-xl ring-1 ring-black/[0.06] dark:ring-white/[0.06] shadow-sm py-16 px-6 text-center flex flex-col items-center justify-center">
         <div className="h-12 w-12 bg-slate-50 dark:bg-white/5 rounded-full flex items-center justify-center mb-4">
           <Server className="h-6 w-6 text-slate-300 dark:text-slate-600" />
         </div>
@@ -200,7 +200,7 @@ export const GPUComparisonTable: React.FC<Props> = ({
   );
 
   return (
-    <div className="bg-white dark:bg-ink-card rounded-xl border border-slate-200 dark:border-ink-border overflow-hidden flex flex-col shadow-sm">
+    <div className="bg-white dark:bg-ink-card rounded-xl ring-1 ring-black/[0.06] dark:ring-white/[0.06] overflow-hidden flex flex-col shadow-[0_1px_3px_0_rgb(0_0_0/_0.08),0_1px_2px_-1px_rgb(0_0_0/_0.08)] dark:shadow-[0_1px_3px_0_rgb(0_0_0/_0.3)]">
 
       {/* ── Mobile cards ──────────────────────────────────────────────────── */}
       <div className="block md:hidden">
@@ -357,14 +357,14 @@ export const GPUComparisonTable: React.FC<Props> = ({
                   <td className="px-4 py-3.5">
                     <div className="min-w-0">
                       <div className="flex items-center gap-1.5">
-                        <span className="text-sm font-bold text-slate-900 dark:text-slate-100 truncate">{item.model}</span>
+                        <span className="text-[13px] font-semibold text-slate-900 dark:text-slate-100 truncate tracking-tight">{item.model}</span>
                         {item.gpuCount > 1 && (
                           <span className="text-[11px] font-mono font-semibold text-slate-400 dark:text-slate-500 shrink-0">×{item.gpuCount}</span>
                         )}
                         {isSpot && <Badge variant="spot" size="xs" />}
                       </div>
                       <span
-                        className="text-[11px] text-slate-400 dark:text-slate-500 font-mono truncate block mt-0.5"
+                        className="text-[10px] text-slate-300 dark:text-slate-600 font-mono truncate block mt-0.5 tracking-tight"
                         title={item.instanceName ?? ''}
                       >
                         {item.instanceName ?? <span className="invisible">–</span>}
@@ -399,7 +399,7 @@ export const GPUComparisonTable: React.FC<Props> = ({
                   <td className="px-3 py-3.5 whitespace-nowrap text-right">
                     <div className="flex items-center justify-end gap-1">
                       {isCheapest && <Badge variant="best" size="xs" />}
-                      <span className={`text-base font-bold font-mono tracking-tight ${isCheapest ? 'text-emerald-700 dark:text-emerald-400' : 'text-slate-900 dark:text-white'}`}>
+                      <span className={`text-[15px] font-bold font-mono tracking-tight ${isCheapest ? 'text-emerald-700 dark:text-emerald-400' : 'text-slate-900 dark:text-white'}`}>
                         ${item.pricePerHour.toFixed(2)}
                       </span>
                     </div>
