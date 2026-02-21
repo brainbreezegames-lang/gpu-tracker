@@ -8,7 +8,7 @@ export const AboutPage: React.FC = () => (
     <div>
       <h1 className="text-xl font-bold text-slate-900 dark:text-white">About GPU Tracker</h1>
       <p className="text-sm text-slate-500 dark:text-slate-400 mt-1">
-        The Kayak for GPU Cloud Computing — real-time price comparison across 19+ providers.
+        The Kayak for GPU Cloud Computing — real-time price comparison across 18+ providers.
       </p>
     </div>
 
@@ -20,7 +20,7 @@ export const AboutPage: React.FC = () => (
       </div>
       <div className="text-sm text-slate-600 dark:text-slate-400 leading-relaxed space-y-2">
         <p>
-          GPU Tracker aggregates real-time GPU cloud pricing from 19+ providers into a single searchable,
+          GPU Tracker aggregates real-time GPU cloud pricing from 18+ providers into a single searchable,
           filterable database. Compare H100 spot prices, find the best $/VRAM ratio, or discover
           which cloud has the cheapest A100 instances.
         </p>
