@@ -293,7 +293,7 @@ export const GPUComparisonTable: React.FC<Props> = ({
         Fixed widths via table-fixed + colgroup = zero layout shift.
       */}
       <div className="hidden md:block overflow-x-auto custom-scrollbar">
-        <table className="w-full table-fixed divide-y divide-slate-200 dark:divide-ink-border">
+        <table className="w-full table-fixed divide-y divide-slate-100 dark:divide-ink-border">
 
           <colgroup>
             <col style={{ width: '24%'  }} />  {/* GPU model    */}
