@@ -1,63 +1,77 @@
 import React from 'react';
 
 // ── GPU family → visual config ──────────────────────────────────────────────
+// Simplified to 5 tiers with consistent gradients. No color noise.
+// Tier darkness conveys performance: darker = more powerful.
 
 interface GPUVisual {
-  abbr: string;       // Short label on the chip
-  bg: string;         // Gradient background
-  glow: string;       // Subtle glow color
-  tier: 'flagship' | 'pro' | 'mainstream' | 'entry' | 'amd';
+  abbr: string;
+  bg: string;
+  tier: 'flagship' | 'datacenter' | 'consumer' | 'entry' | 'amd';
 }
+
+// Tier gradient palette (slate scale + AMD red)
+const TIER_BG = {
+  flagship:   'from-slate-800 to-slate-900',
+  datacenter: 'from-slate-600 to-slate-700',
+  consumer:   'from-slate-500 to-slate-600',
+  entry:      'from-slate-400 to-slate-500',
+  amd:        'from-red-600 to-red-700',
+} as const;
 
 function getGPUVisual(model: string): GPUVisual {
   const m = model.toLowerCase();
 
-  // ── Flagship (gold/amber) ──
-  if (/gb200/i.test(m))     return { abbr: 'GB200', bg: 'from-amber-500 to-yellow-600',     glow: 'shadow-amber-500/20', tier: 'flagship' };
-  if (/b300/i.test(m))      return { abbr: 'B300',  bg: 'from-amber-500 to-orange-600',     glow: 'shadow-amber-500/20', tier: 'flagship' };
-  if (/b200/i.test(m))      return { abbr: 'B200',  bg: 'from-amber-500 to-orange-600',     glow: 'shadow-amber-500/20', tier: 'flagship' };
-  if (/h200/i.test(m))      return { abbr: 'H200',  bg: 'from-emerald-500 to-teal-600',     glow: 'shadow-emerald-500/20', tier: 'flagship' };
-  if (/h100.*sxm/i.test(m)) return { abbr: 'H100S', bg: 'from-emerald-600 to-green-700',    glow: 'shadow-emerald-500/20', tier: 'flagship' };
-  if (/h100.*nvl/i.test(m)) return { abbr: 'H100N', bg: 'from-emerald-600 to-green-700',    glow: 'shadow-emerald-500/20', tier: 'flagship' };
-  if (/h100/i.test(m))      return { abbr: 'H100',  bg: 'from-emerald-600 to-green-700',    glow: 'shadow-emerald-500/20', tier: 'flagship' };
+  // ── Flagship (latest datacenter) ──
+  if (/gb200/i.test(m))     return { abbr: 'GB200', bg: TIER_BG.flagship, tier: 'flagship' };
+  if (/b300/i.test(m))      return { abbr: 'B300',  bg: TIER_BG.flagship, tier: 'flagship' };
+  if (/b200/i.test(m))      return { abbr: 'B200',  bg: TIER_BG.flagship, tier: 'flagship' };
+  if (/h200/i.test(m))      return { abbr: 'H200',  bg: TIER_BG.flagship, tier: 'flagship' };
+  if (/h100.*sxm/i.test(m)) return { abbr: 'H100S', bg: TIER_BG.flagship, tier: 'flagship' };
+  if (/h100.*nvl/i.test(m)) return { abbr: 'H100N', bg: TIER_BG.flagship, tier: 'flagship' };
+  if (/h100/i.test(m))      return { abbr: 'H100',  bg: TIER_BG.flagship, tier: 'flagship' };
 
-  // ── Pro datacenter (blue/indigo) ──
-  if (/a100.*80/i.test(m))  return { abbr: 'A100',  bg: 'from-blue-600 to-indigo-700',      glow: 'shadow-blue-500/20', tier: 'pro' };
-  if (/a100/i.test(m))      return { abbr: 'A100',  bg: 'from-blue-600 to-indigo-700',      glow: 'shadow-blue-500/20', tier: 'pro' };
-  if (/l40s/i.test(m))      return { abbr: 'L40S',  bg: 'from-cyan-600 to-blue-700',        glow: 'shadow-cyan-500/20', tier: 'pro' };
-  if (/l40(?!s)/i.test(m))  return { abbr: 'L40',   bg: 'from-cyan-600 to-blue-700',        glow: 'shadow-cyan-500/20', tier: 'pro' };
-  if (/a40\b/i.test(m))     return { abbr: 'A40',   bg: 'from-sky-600 to-blue-700',         glow: 'shadow-sky-500/20', tier: 'pro' };
-  if (/a6000/i.test(m))     return { abbr: 'A6000', bg: 'from-sky-600 to-blue-700',         glow: 'shadow-sky-500/20', tier: 'pro' };
-  if (/a5000/i.test(m))     return { abbr: 'A5000', bg: 'from-sky-600 to-blue-700',         glow: 'shadow-sky-500/20', tier: 'pro' };
-  if (/a4000/i.test(m))     return { abbr: 'A4000', bg: 'from-sky-600 to-blue-700',         glow: 'shadow-sky-500/20', tier: 'pro' };
-  if (/l4\b/i.test(m))      return { abbr: 'L4',    bg: 'from-sky-500 to-cyan-600',         glow: 'shadow-sky-500/20', tier: 'pro' };
+  // ── Datacenter (pro/workstation) ──
+  if (/a100.*80/i.test(m))  return { abbr: 'A100',  bg: TIER_BG.datacenter, tier: 'datacenter' };
+  if (/a100/i.test(m))      return { abbr: 'A100',  bg: TIER_BG.datacenter, tier: 'datacenter' };
+  if (/l40s/i.test(m))      return { abbr: 'L40S',  bg: TIER_BG.datacenter, tier: 'datacenter' };
+  if (/l40(?!s)/i.test(m))  return { abbr: 'L40',   bg: TIER_BG.datacenter, tier: 'datacenter' };
+  if (/a40\b/i.test(m))     return { abbr: 'A40',   bg: TIER_BG.datacenter, tier: 'datacenter' };
+  if (/a6000/i.test(m))     return { abbr: 'A6000', bg: TIER_BG.datacenter, tier: 'datacenter' };
+  if (/a5000/i.test(m))     return { abbr: 'A5000', bg: TIER_BG.datacenter, tier: 'datacenter' };
+  if (/a4000/i.test(m))     return { abbr: 'A4000', bg: TIER_BG.datacenter, tier: 'datacenter' };
+  if (/l4\b/i.test(m))      return { abbr: 'L4',    bg: TIER_BG.datacenter, tier: 'datacenter' };
 
-  // ── Consumer RTX (green) ──
-  if (/4090/i.test(m))      return { abbr: '4090',  bg: 'from-green-500 to-emerald-600',    glow: 'shadow-green-500/20', tier: 'mainstream' };
-  if (/4080/i.test(m))      return { abbr: '4080',  bg: 'from-green-500 to-emerald-600',    glow: 'shadow-green-500/20', tier: 'mainstream' };
-  if (/4070/i.test(m))      return { abbr: '4070',  bg: 'from-green-500 to-emerald-600',    glow: 'shadow-green-500/20', tier: 'mainstream' };
-  if (/3090/i.test(m))      return { abbr: '3090',  bg: 'from-lime-600 to-green-700',       glow: 'shadow-lime-500/20', tier: 'mainstream' };
-  if (/3080/i.test(m))      return { abbr: '3080',  bg: 'from-lime-600 to-green-700',       glow: 'shadow-lime-500/20', tier: 'mainstream' };
-  if (/3070/i.test(m))      return { abbr: '3070',  bg: 'from-lime-600 to-green-700',       glow: 'shadow-lime-500/20', tier: 'mainstream' };
-  if (/3060/i.test(m))      return { abbr: '3060',  bg: 'from-lime-600 to-green-700',       glow: 'shadow-lime-500/20', tier: 'mainstream' };
-  if (/6000.*ada/i.test(m)) return { abbr: '6000',  bg: 'from-green-500 to-emerald-600',    glow: 'shadow-green-500/20', tier: 'mainstream' };
+  // ── Consumer (GeForce RTX) ──
+  if (/5090/i.test(m))      return { abbr: '5090',  bg: TIER_BG.consumer, tier: 'consumer' };
+  if (/5080/i.test(m))      return { abbr: '5080',  bg: TIER_BG.consumer, tier: 'consumer' };
+  if (/5070/i.test(m))      return { abbr: '5070',  bg: TIER_BG.consumer, tier: 'consumer' };
+  if (/5060/i.test(m))      return { abbr: '5060',  bg: TIER_BG.consumer, tier: 'consumer' };
+  if (/4090/i.test(m))      return { abbr: '4090',  bg: TIER_BG.consumer, tier: 'consumer' };
+  if (/4080/i.test(m))      return { abbr: '4080',  bg: TIER_BG.consumer, tier: 'consumer' };
+  if (/4070/i.test(m))      return { abbr: '4070',  bg: TIER_BG.consumer, tier: 'consumer' };
+  if (/3090/i.test(m))      return { abbr: '3090',  bg: TIER_BG.consumer, tier: 'consumer' };
+  if (/3080/i.test(m))      return { abbr: '3080',  bg: TIER_BG.consumer, tier: 'consumer' };
+  if (/3070/i.test(m))      return { abbr: '3070',  bg: TIER_BG.consumer, tier: 'consumer' };
+  if (/3060/i.test(m))      return { abbr: '3060',  bg: TIER_BG.consumer, tier: 'consumer' };
+  if (/6000.*ada/i.test(m)) return { abbr: '6000',  bg: TIER_BG.consumer, tier: 'consumer' };
 
-  // ── Entry / legacy (slate/gray) ──
-  if (/a10g/i.test(m))      return { abbr: 'A10G',  bg: 'from-slate-500 to-slate-600',      glow: 'shadow-slate-500/20', tier: 'entry' };
-  if (/a10\b/i.test(m))     return { abbr: 'A10',   bg: 'from-slate-500 to-slate-600',      glow: 'shadow-slate-500/20', tier: 'entry' };
-  if (/a30\b/i.test(m))     return { abbr: 'A30',   bg: 'from-slate-500 to-slate-600',      glow: 'shadow-slate-500/20', tier: 'entry' };
-  if (/v100/i.test(m))      return { abbr: 'V100',  bg: 'from-zinc-500 to-zinc-600',        glow: 'shadow-zinc-500/20', tier: 'entry' };
-  if (/t4\b/i.test(m))      return { abbr: 'T4',    bg: 'from-zinc-500 to-zinc-600',        glow: 'shadow-zinc-500/20', tier: 'entry' };
-  if (/p100/i.test(m))      return { abbr: 'P100',  bg: 'from-stone-500 to-stone-600',      glow: 'shadow-stone-500/20', tier: 'entry' };
-  if (/k80/i.test(m))       return { abbr: 'K80',   bg: 'from-stone-500 to-stone-600',      glow: 'shadow-stone-500/20', tier: 'entry' };
+  // ── Entry / legacy ──
+  if (/a10g/i.test(m))      return { abbr: 'A10G',  bg: TIER_BG.entry, tier: 'entry' };
+  if (/a10\b/i.test(m))     return { abbr: 'A10',   bg: TIER_BG.entry, tier: 'entry' };
+  if (/a30\b/i.test(m))     return { abbr: 'A30',   bg: TIER_BG.entry, tier: 'entry' };
+  if (/v100/i.test(m))      return { abbr: 'V100',  bg: TIER_BG.entry, tier: 'entry' };
+  if (/t4\b/i.test(m))      return { abbr: 'T4',    bg: TIER_BG.entry, tier: 'entry' };
+  if (/p100/i.test(m))      return { abbr: 'P100',  bg: TIER_BG.entry, tier: 'entry' };
+  if (/k80/i.test(m))       return { abbr: 'K80',   bg: TIER_BG.entry, tier: 'entry' };
 
-  // ── AMD (red) ──
-  if (/mi300/i.test(m))     return { abbr: 'MI300', bg: 'from-red-500 to-rose-600',         glow: 'shadow-red-500/20', tier: 'amd' };
-  if (/mi250/i.test(m))     return { abbr: 'MI250', bg: 'from-red-500 to-rose-600',         glow: 'shadow-red-500/20', tier: 'amd' };
-  if (/mi210/i.test(m))     return { abbr: 'MI210', bg: 'from-red-500 to-rose-600',         glow: 'shadow-red-500/20', tier: 'amd' };
+  // ── AMD ──
+  if (/mi300/i.test(m))     return { abbr: 'MI300', bg: TIER_BG.amd, tier: 'amd' };
+  if (/mi250/i.test(m))     return { abbr: 'MI250', bg: TIER_BG.amd, tier: 'amd' };
+  if (/mi210/i.test(m))     return { abbr: 'MI210', bg: TIER_BG.amd, tier: 'amd' };
 
   // ── Fallback ──
-  return { abbr: 'GPU', bg: 'from-slate-400 to-slate-500', glow: 'shadow-slate-400/20', tier: 'entry' };
+  return { abbr: 'GPU', bg: TIER_BG.entry, tier: 'entry' };
 }
 
 // ── Component ────────────────────────────────────────────────────────────────
@@ -76,10 +90,9 @@ export const GPUChip: React.FC<GPUChipProps> = ({ model, size = 'sm' }) => {
 
   return (
     <div
-      className={`${sizeClasses} shrink-0 rounded-lg bg-gradient-to-br ${vis.bg} shadow-sm ${vis.glow} flex items-center justify-center font-mono font-bold text-white/90 tracking-tight select-none`}
+      className={`${sizeClasses} relative shrink-0 rounded-lg bg-gradient-to-br ${vis.bg} flex items-center justify-center font-mono font-bold text-white/90 tracking-tight select-none`}
       title={model}
     >
-      {/* Subtle chip circuit lines */}
       <svg className="absolute inset-0 w-full h-full opacity-[0.08]" viewBox="0 0 28 28" fill="none">
         <line x1="0" y1="7" x2="28" y2="7" stroke="white" strokeWidth="0.5" />
         <line x1="0" y1="21" x2="28" y2="21" stroke="white" strokeWidth="0.5" />
