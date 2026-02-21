@@ -229,6 +229,7 @@ export const GPUComparisonTable: React.FC<Props> = ({
                       {isSpot && <Badge variant="spot" size="xs" />}
                       <span className={`h-2 w-2 rounded-full shrink-0 ${getRiskDotClass(riskVariant)}`} />
                       <Badge variant={riskVariant} size="xs" />
+                      </div>
                     </div>
                   </div>
                   <div className="text-right shrink-0">
@@ -358,7 +359,9 @@ export const GPUComparisonTable: React.FC<Props> = ({
 
                   {/* ── GPU Model ────────────────────────────────────── */}
                   <td className="px-4 py-3.5">
-                    <div className="min-w-0">
+                    <div className="min-w-0 flex items-center gap-2.5">
+                      <GPUChip model={item.model} />
+                      <div className="min-w-0">
                       <div className="flex items-center gap-1.5">
                         <span className="text-[13px] font-semibold text-slate-900 dark:text-slate-100 truncate tracking-tight">{item.model}</span>
                         {item.gpuCount > 1 && (
