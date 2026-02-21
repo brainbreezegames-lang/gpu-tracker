@@ -26,7 +26,7 @@ const PROVIDER_URLS: Record<string, string> = {
   'AWS':           'https://aws.amazon.com/ec2/instance-types/p4/',
   'Azure':         'https://azure.microsoft.com/en-us/pricing/details/virtual-machines/linux/',
   'GCP':           'https://cloud.google.com/compute/gpus-pricing',
-  'CoreWeave':     'https://www.coreweave.com',
+  'CoreWeave':     'https://www.coreweave.com/pricing',
   'TensorDock':    'https://www.tensordock.com',
   'DigitalOcean':  'https://www.digitalocean.com/products/gpu-droplets',
   'Nebius':        'https://nebius.com',
@@ -41,7 +41,6 @@ const PROVIDER_URLS: Record<string, string> = {
   'Hyperstack':    'https://www.hyperstack.cloud/gpu-cloud-pricing',
   'Genesis Cloud': 'https://www.genesis.cloud/gpu-cloud/',
   'OVHcloud':      'https://www.ovhcloud.com/en/public-cloud/gpu/',
-  'CoreWeave':     'https://www.coreweave.com/pricing',
   'Crusoe':        'https://crusoe.ai/cloud/pricing/',
   'Latitude.sh':   'https://www.latitude.sh/pricing',
 };
