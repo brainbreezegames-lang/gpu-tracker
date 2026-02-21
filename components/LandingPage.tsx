@@ -336,7 +336,7 @@ export const LandingPage: React.FC<LandingPageProps> = ({ onStartPro, onTryDemo 
                   'Volatility badge: Low / Medium / High',
                   'Don\'t buy unstable "deals"',
                 ],
-                accent: 'sky',
+                accent: 'slate',
               },
               {
                 icon: Bell,
@@ -369,7 +369,7 @@ export const LandingPage: React.FC<LandingPageProps> = ({ onStartPro, onTryDemo 
                   'Shareable team links',
                   'Alert attached to saved search',
                 ],
-                accent: 'purple',
+                accent: 'blue',
               },
               {
                 icon: Users,
@@ -380,7 +380,7 @@ export const LandingPage: React.FC<LandingPageProps> = ({ onStartPro, onTryDemo 
                   'Slack/webhook alerts',
                   'Tags + exports for accountability',
                 ],
-                accent: 'rose',
+                accent: 'slate',
               },
             ].map(({ icon: Icon, title, desc, bullets, accent }) => (
               <div key={title} className="rounded-2xl border border-slate-200 dark:border-ink-border bg-white dark:bg-ink-card p-6 hover:border-slate-300 dark:hover:border-slate-600 transition-colors">
