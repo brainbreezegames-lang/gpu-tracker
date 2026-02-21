@@ -262,9 +262,9 @@ export const PricingPage: React.FC = () => {
       </div>
 
       {/* ── Teams callout ───────────────────────────────────── */}
-      <div className="rounded-2xl border border-sky-200 dark:border-sky-500/20 bg-sky-50 dark:bg-sky-500/10 p-6 mb-14 flex flex-col sm:flex-row items-start sm:items-center gap-5">
-        <div className="h-12 w-12 rounded-xl bg-sky-100 dark:bg-sky-500/20 flex items-center justify-center shrink-0">
-          <Users className="h-6 w-6 text-sky-600 dark:text-sky-400" />
+      <div className="rounded-2xl border border-blue-200 dark:border-blue-500/20 bg-blue-50 dark:bg-blue-500/10 p-6 mb-14 flex flex-col sm:flex-row items-start sm:items-center gap-5">
+        <div className="h-12 w-12 rounded-xl bg-blue-100 dark:bg-blue-500/20 flex items-center justify-center shrink-0">
+          <Users className="h-6 w-6 text-blue-600 dark:text-blue-400" />
         </div>
         <div className="flex-1">
           <div className="font-display font-bold text-slate-900 dark:text-white mb-1">
@@ -276,7 +276,7 @@ export const PricingPage: React.FC = () => {
           </p>
         </div>
         <div className="flex flex-col gap-2 shrink-0">
-          <button className="flex items-center gap-2 px-5 py-2.5 rounded-xl text-sm font-bold bg-sky-600 text-white hover:bg-sky-500 transition-colors">
+          <button className="flex items-center gap-2 px-5 py-2.5 rounded-xl text-sm font-bold bg-blue-600 text-white hover:bg-blue-500 transition-colors">
             <Slack className="h-4 w-4" /> Contact sales
           </button>
           <div className="text-[10px] text-slate-400 dark:text-slate-500 text-center font-mono">from $199/mo</div>
