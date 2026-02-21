@@ -500,6 +500,8 @@ export function getVolatilityInfo(item: GPUInstance): VolatilityInfo {
 // Used by "Predictable" mode to sort rows.
 
 export function getPredictableScore(item: GPUInstance): number {
+  const cached = _predictableCache.get(item.id);
+  if (cached !== undefined) return cached;
   // Base = TMC at 40h/week, 100GB storage, 50GB egress (typical)
   const tmc    = calcTMC(item, 40, 100, 50);
   // Risk multiplier: score 100 = 0% penalty, score 0 = 50% penalty
@@ -508,18 +510,24 @@ export function getPredictableScore(item: GPUInstance): number {
   const billing = getProviderBilling(item.provider);
   const stopPenalty = billing.billedWhenStopped ? 1.15 : 1.0;
 
-  return tmc.totalMonthly * (1 + risk) * stopPenalty;
+  const result = tmc.totalMonthly * (1 + risk) * stopPenalty;
+  _predictableCache.set(item.id, result);
+  return result;
 }
 
 // Fast-to-Acquire score: lower = faster to get
 export function getFrictionScore(item: GPUInstance): number {
+  const cached = _frictionCache.get(item.id);
+  if (cached !== undefined) return cached;
   const f = getProcurementFriction(item.provider, item.model);
   const frictionMap: Record<FrictionLevel, number> = {
     'Self-serve':   0,
     'Quota May Apply': 100,
     'Waitlist':     200,
   };
-  return frictionMap[f.level] + item.pricePerHour;
+  const result = frictionMap[f.level] + item.pricePerHour;
+  _frictionCache.set(item.id, result);
+  return result;
 }
 
 // ── CSV Export ────────────────────────────────────────────────────────────────
