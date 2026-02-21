@@ -42,7 +42,7 @@ export const APIPage: React.FC = () => (
       <CodeBlock>{`{
   "lastUpdated": "2026-02-21T11:29:22Z",
   "count": 12824,
-  "providerCount": 19,
+  "providerCount": 18,
   "modelCount": 55,
   "data": [{
     "id":           "uuid-v5",
