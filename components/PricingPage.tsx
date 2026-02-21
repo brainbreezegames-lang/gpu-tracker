@@ -232,8 +232,8 @@ export const PricingPage: React.FC = () => {
               icon: History,
               title: '7-day history',
               desc: 'See how prices moved over the past week. Spot patterns, time your purchases.',
-              color: 'text-sky-500',
-              bg: 'bg-sky-50 dark:bg-sky-500/10',
+              color: 'text-blue-500',
+              bg: 'bg-blue-50 dark:bg-blue-500/10',
             },
             {
               icon: Bookmark,
