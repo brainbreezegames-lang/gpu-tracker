@@ -1,4 +1,5 @@
 import React, { useState, useRef, useEffect, useCallback } from 'react';
+import ReactDOM from 'react-dom';
 import { FilterState, Commitment } from '../types';
 import { Filter, RotateCcw, X, ChevronDown, Search } from 'lucide-react';
 import { InfoTooltip } from './ui';
