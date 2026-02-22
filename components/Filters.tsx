@@ -128,10 +128,10 @@ const MultiSelect: React.FC<MultiSelectProps> = ({ options, selected, onChange, 
     <div
       ref={dropdownRef}
       style={dropdownStyle}
-      className="bg-white dark:bg-slate-900 rounded-lg border border-slate-200 dark:border-slate-700 shadow-xl overflow-hidden"
+      className="bg-white dark:bg-ink-card rounded-lg border border-slate-200 dark:border-ink-border shadow-xl overflow-hidden"
     >
       {/* Search input */}
-      <div className="p-2 border-b border-slate-100 dark:border-slate-800">
+      <div className="p-2 border-b border-slate-100 dark:border-ink-border">
         <div className="relative">
           <Search className="absolute left-2 top-1/2 -translate-y-1/2 h-3 w-3 text-slate-400" />
           <input
@@ -140,7 +140,7 @@ const MultiSelect: React.FC<MultiSelectProps> = ({ options, selected, onChange, 
             value={query}
             onChange={(e) => setQuery(e.target.value)}
             placeholder="Search…"
-            className="w-full pl-6 pr-2 py-1 text-xs bg-slate-50 dark:bg-slate-950 rounded-md border border-slate-200 dark:border-slate-700 text-slate-900 dark:text-slate-100 placeholder-slate-400 outline-none focus:border-brand-500"
+            className="w-full pl-6 pr-2 py-1 text-xs bg-slate-50 dark:bg-ink rounded-md border border-slate-200 dark:border-ink-border text-slate-900 dark:text-slate-100 placeholder-slate-400 outline-none focus:border-brand-500"
           />
         </div>
       </div>
@@ -159,8 +159,8 @@ const MultiSelect: React.FC<MultiSelectProps> = ({ options, selected, onChange, 
                 onClick={() => toggle(option)}
                 className={`w-full flex items-center gap-2 px-3 py-1.5 text-left text-xs transition-colors ${
                   checked
-                    ? 'bg-slate-50 dark:bg-slate-800 text-slate-900 dark:text-slate-100 font-medium'
-                    : 'text-slate-600 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-800/50 hover:text-slate-900 dark:hover:text-slate-200'
+                    ? 'bg-slate-50 dark:bg-ink-muted text-slate-900 dark:text-slate-100 font-medium'
+                    : 'text-slate-600 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-white/5/50 hover:text-slate-900 dark:hover:text-slate-200'
                 }`}
               >
                 <span className={`h-3.5 w-3.5 shrink-0 rounded border flex items-center justify-center transition-colors ${
@@ -183,7 +183,7 @@ const MultiSelect: React.FC<MultiSelectProps> = ({ options, selected, onChange, 
 
       {/* Footer: clear */}
       {selected.length > 0 && (
-        <div className="border-t border-slate-100 dark:border-slate-800 px-3 py-1.5">
+        <div className="border-t border-slate-100 dark:border-ink-border px-3 py-1.5">
           <button
             type="button"
             onClick={() => { onChange([]); setOpen(false); }}
@@ -205,8 +205,8 @@ const MultiSelect: React.FC<MultiSelectProps> = ({ options, selected, onChange, 
         onClick={openDropdown}
         className={`w-full text-left flex items-center gap-1.5 flex-wrap min-h-[34px] px-2.5 py-1.5 rounded-lg border transition-colors text-sm ${
           open
-            ? 'border-brand-500 ring-1 ring-brand-500/30 bg-white dark:bg-slate-900'
-            : 'border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-950 hover:border-slate-300 dark:hover:border-slate-600'
+            ? 'border-brand-500 ring-1 ring-brand-500/30 bg-white dark:bg-ink-card'
+            : 'border-slate-200 dark:border-ink-border bg-slate-50 dark:bg-ink hover:border-slate-300 dark:hover:border-slate-600'
         }`}
       >
         {selected.length === 0 ? (
@@ -259,7 +259,7 @@ const chip = (active: boolean) =>
   `px-3 sm:px-3.5 py-2.5 sm:py-2 text-xs rounded-lg font-semibold border transition-colors min-h-[36px] ${
     active
       ? 'bg-slate-900 dark:bg-white text-white dark:text-slate-900 border-slate-900 dark:border-white'
-      : 'bg-white dark:bg-slate-800 text-slate-600 dark:text-slate-400 border-slate-200 dark:border-slate-700 hover:border-slate-400 dark:hover:border-slate-500'
+      : 'bg-white dark:bg-ink-muted text-slate-600 dark:text-slate-400 border-slate-200 dark:border-ink-border hover:border-slate-400 dark:hover:border-slate-500'
   }`;
 
 // ── Main component ────────────────────────────────────────────────────────────
@@ -292,7 +292,7 @@ export const Filters: React.FC<FiltersProps> = ({
   const resetAll = () => setFilters(DEFAULT_FILTERS);
 
   return (
-    <div className="bg-white dark:bg-slate-900 rounded-xl border border-slate-200/60 dark:border-white/[0.06] shadow-sm dark:shadow-[0_1px_3px_0_rgb(0_0_0/_0.3)] overflow-hidden transition-colors duration-300">
+    <div className="bg-white dark:bg-ink-card rounded-xl border border-slate-200/60 dark:border-white/[0.06] shadow-sm dark:shadow-[0_1px_3px_0_rgb(0_0_0/_0.3)] overflow-hidden transition-colors duration-300">
 
       {/* ── Header ───────────────────────────────────────────── */}
       <div className="px-4 py-3 bg-slate-50/30 dark:bg-white/[0.02] border-b border-slate-100 dark:border-white/[0.06]">
@@ -341,7 +341,7 @@ export const Filters: React.FC<FiltersProps> = ({
                 type="number" min="0"
                 value={filters.minPrice}
                 onChange={(e) => setFilters((p) => ({ ...p, minPrice: Number(e.target.value) }))}
-                className="block w-full rounded-lg border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-950 pl-5 pr-2 py-1.5 text-sm font-mono text-slate-900 dark:text-slate-100 focus:border-brand-500 outline-none"
+                className="block w-full rounded-lg border border-slate-200 dark:border-ink-border bg-slate-50 dark:bg-ink pl-5 pr-2 py-1.5 text-sm font-mono text-slate-900 dark:text-slate-100 focus:border-brand-500 outline-none"
                 placeholder="0"
               />
             </div>
@@ -352,7 +352,7 @@ export const Filters: React.FC<FiltersProps> = ({
                 type="number" min="0"
                 value={filters.maxPrice}
                 onChange={(e) => setFilters((p) => ({ ...p, maxPrice: Number(e.target.value) }))}
-                className="block w-full rounded-lg border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-950 pl-5 pr-2 py-1.5 text-sm font-mono text-slate-900 dark:text-slate-100 focus:border-brand-500 outline-none"
+                className="block w-full rounded-lg border border-slate-200 dark:border-ink-border bg-slate-50 dark:bg-ink pl-5 pr-2 py-1.5 text-sm font-mono text-slate-900 dark:text-slate-100 focus:border-brand-500 outline-none"
                 placeholder="999"
               />
             </div>
@@ -392,7 +392,7 @@ export const Filters: React.FC<FiltersProps> = ({
         </div>
 
         {/* ── Divider ──────────────────────────────────────── */}
-        <div className="-mx-4 border-t border-dashed border-slate-100 dark:border-slate-800" />
+        <div className="-mx-4 border-t border-dashed border-slate-100 dark:border-ink-border" />
 
         {/* ── Provider ─────────────────────────────────────── */}
         <div>

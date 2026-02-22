@@ -36,7 +36,7 @@ const BarRow = ({
     <span className="text-xs font-medium text-slate-600 dark:text-slate-400 w-24 shrink-0 text-right truncate" title={label}>
       {label}
     </span>
-    <div className="flex-1 bg-slate-100 dark:bg-slate-800 rounded-full h-4 overflow-hidden">
+    <div className="flex-1 bg-slate-100 dark:bg-ink-muted rounded-full h-4 overflow-hidden">
       <div
         className={`${color} rounded-full h-4 transition-all duration-700`}
         style={{ width: `${Math.max(2, (value / max) * 100)}%` }}
@@ -53,7 +53,7 @@ const StatCard = ({
 }: {
   label: string; value: string; sub?: string; icon: React.FC<{ className?: string }>; color: string;
 }) => (
-  <div className="bg-white dark:bg-slate-900 rounded-xl border border-slate-200 dark:border-slate-800 p-4">
+  <div className="bg-white dark:bg-ink-card rounded-xl border border-slate-200 dark:border-ink-border p-4">
     <div className={`${color} mb-2`}><Icon className="h-4 w-4" /></div>
     <div className="text-lg font-bold font-mono text-slate-900 dark:text-white">{value}</div>
     {sub && <div className="text-[10px] text-slate-400 dark:text-slate-500 font-mono mt-0.5">{sub}</div>}
@@ -135,13 +135,13 @@ const CostCalculator: React.FC<{ data: GPUInstance[] }> = ({ data }) => {
     `px-3 py-1.5 text-xs font-semibold rounded-lg transition-colors ${
       active
         ? 'bg-slate-900 dark:bg-white text-white dark:text-slate-900'
-        : 'bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 hover:bg-slate-200 dark:hover:bg-slate-700'
+        : 'bg-slate-100 dark:bg-ink-muted text-slate-600 dark:text-slate-300 hover:bg-slate-200 dark:hover:bg-white/5'
     }`;
 
   return (
-    <div className="bg-white dark:bg-slate-900 rounded-xl border border-slate-200 dark:border-slate-800 overflow-hidden">
+    <div className="bg-white dark:bg-ink-card rounded-xl border border-slate-200 dark:border-ink-border overflow-hidden">
       {/* Controls — horizontal, compact */}
-      <div className="px-5 py-4 border-b border-slate-100 dark:border-slate-800 flex flex-wrap items-end gap-4">
+      <div className="px-5 py-4 border-b border-slate-100 dark:border-ink-border flex flex-wrap items-end gap-4">
         <div>
           <label className="text-[10px] font-semibold text-slate-400 dark:text-slate-500 uppercase tracking-wider block mb-1.5">Workload</label>
           <div className="flex gap-1">
@@ -175,7 +175,7 @@ const CostCalculator: React.FC<{ data: GPUInstance[] }> = ({ data }) => {
       </div>
 
       {/* Info */}
-      <div className="px-5 py-2.5 bg-slate-50 dark:bg-slate-800/50 text-xs text-slate-500 dark:text-slate-400">
+      <div className="px-5 py-2.5 bg-slate-50 dark:bg-white/4 text-xs text-slate-500 dark:text-slate-400">
         <strong className="text-slate-700 dark:text-slate-300">{modelSizeB}B</strong> model needs ≥{vramNeeded}GB VRAM.
         {workload === 'inference' ? ' Ranked by $/1M tokens.' : ' Ranked by monthly cost.'}
       </div>
@@ -189,7 +189,7 @@ const CostCalculator: React.FC<{ data: GPUInstance[] }> = ({ data }) => {
         <div className="overflow-x-auto">
           <table className="w-full text-sm">
             <thead>
-              <tr className="border-b border-slate-100 dark:border-slate-800">
+              <tr className="border-b border-slate-100 dark:border-ink-border">
                 <th className="py-2.5 px-5 text-left text-[10px] font-semibold text-slate-500 dark:text-slate-400 uppercase tracking-wider">Instance</th>
                 <th className="py-2.5 px-3 text-right text-[10px] font-semibold text-slate-500 dark:text-slate-400 uppercase tracking-wider">VRAM</th>
                 <th className="py-2.5 px-3 text-right text-[10px] font-semibold text-slate-500 dark:text-slate-400 uppercase tracking-wider">$/hr</th>
@@ -205,7 +205,7 @@ const CostCalculator: React.FC<{ data: GPUInstance[] }> = ({ data }) => {
             </thead>
             <tbody className="divide-y divide-slate-50 dark:divide-slate-800/50">
               {results.map((item, i) => (
-                <tr key={item.id} className="hover:bg-slate-50 dark:hover:bg-slate-800/30 transition-colors">
+                <tr key={item.id} className="hover:bg-slate-50 dark:hover:bg-white/5/30 transition-colors">
                   <td className="py-2.5 px-5">
                     <div className="flex items-center gap-2">
                       {i === 0 && <span className="text-[9px] font-bold bg-emerald-100 text-emerald-700 dark:bg-emerald-500/20 dark:text-emerald-400 px-1.5 py-0.5 rounded shrink-0">BEST</span>}
@@ -305,7 +305,7 @@ export const TrendsPage: React.FC<Props> = ({ data, isLoading }) => {
     return (
       <div className="space-y-4">
         {[...Array(3)].map((_, i) => (
-          <div key={i} className="h-32 bg-white dark:bg-slate-900 rounded-xl border border-slate-200 dark:border-slate-800 animate-pulse" />
+          <div key={i} className="h-32 bg-white dark:bg-ink-card rounded-xl border border-slate-200 dark:border-ink-border animate-pulse" />
         ))}
       </div>
     );
@@ -346,12 +346,12 @@ export const TrendsPage: React.FC<Props> = ({ data, isLoading }) => {
           <select
             value={effectiveModel}
             onChange={(e) => setSelectedModel(e.target.value)}
-            className="text-xs rounded-lg border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-900 dark:text-slate-100 px-2.5 py-1.5 focus:border-brand-500 outline-none"
+            className="text-xs rounded-lg border border-slate-200 dark:border-ink-border bg-white dark:bg-ink-muted text-slate-900 dark:text-slate-100 px-2.5 py-1.5 focus:border-brand-500 outline-none"
           >
             {availableModels.map((m) => <option key={m} value={m}>{m}</option>)}
           </select>
         </div>
-        <div className="bg-white dark:bg-slate-900 rounded-xl border border-slate-200 dark:border-slate-800 p-5">
+        <div className="bg-white dark:bg-ink-card rounded-xl border border-slate-200 dark:border-ink-border p-5">
           {providerBreakdown.length === 0 ? (
             <p className="text-slate-500 dark:text-slate-400 text-sm text-center py-4">No data for {effectiveModel}</p>
           ) : (
@@ -374,7 +374,7 @@ export const TrendsPage: React.FC<Props> = ({ data, isLoading }) => {
       <Section title="Best Deal by VRAM Tier" sub="Cheapest instance in each tier">
         <div className="grid grid-cols-2 lg:grid-cols-4 gap-3">
           {vramTiers.map(({ name, best, count }) => (
-            <div key={name} className="bg-white dark:bg-slate-900 rounded-xl border border-slate-200 dark:border-slate-800 p-4">
+            <div key={name} className="bg-white dark:bg-ink-card rounded-xl border border-slate-200 dark:border-ink-border p-4">
               <span className="text-[10px] font-semibold text-slate-500 dark:text-slate-400 uppercase tracking-wider">{name}</span>
               {best ? (
                 <>
@@ -396,7 +396,7 @@ export const TrendsPage: React.FC<Props> = ({ data, isLoading }) => {
 
       {/* ── Provider Inventory (collapsed by default) ──────────── */}
       <Section title="Provider Inventory" sub="Instance count by provider" defaultOpen={false}>
-        <div className="bg-white dark:bg-slate-900 rounded-xl border border-slate-200 dark:border-slate-800 p-5">
+        <div className="bg-white dark:bg-ink-card rounded-xl border border-slate-200 dark:border-ink-border p-5">
           <div className="space-y-2.5">
             {providerStats.map(({ provider, count, minPrice, modelCount }) => (
               <BarRow
@@ -445,11 +445,11 @@ const ModelCoverageMatrix: React.FC<{ data: GPUInstance[] }> = ({ data }) => {
   }, [data]);
 
   return (
-    <div className="bg-white dark:bg-slate-900 rounded-xl border border-slate-200 dark:border-slate-800 overflow-x-auto">
+    <div className="bg-white dark:bg-ink-card rounded-xl border border-slate-200 dark:border-ink-border overflow-x-auto">
       <table className="min-w-full text-xs">
         <thead>
-          <tr className="bg-slate-50 dark:bg-slate-800/50">
-            <th className="px-4 py-2.5 text-left font-semibold text-slate-500 dark:text-slate-400 sticky left-0 bg-slate-50 dark:bg-slate-800/50 w-24">Model</th>
+          <tr className="bg-slate-50 dark:bg-white/4">
+            <th className="px-4 py-2.5 text-left font-semibold text-slate-500 dark:text-slate-400 sticky left-0 bg-slate-50 dark:bg-white/4 w-24">Model</th>
             {providers.map((p) => (
               <th key={p} className="px-2 py-2.5 font-semibold text-slate-500 dark:text-slate-400 text-center">
                 <div className="truncate max-w-[56px]" title={p}>{p}</div>
@@ -459,8 +459,8 @@ const ModelCoverageMatrix: React.FC<{ data: GPUInstance[] }> = ({ data }) => {
         </thead>
         <tbody className="divide-y divide-slate-100 dark:divide-slate-800">
           {topModels.map((model) => (
-            <tr key={model} className="hover:bg-slate-50 dark:hover:bg-slate-800/30 transition-colors">
-              <td className="px-4 py-2 font-semibold text-slate-900 dark:text-slate-100 sticky left-0 bg-white dark:bg-slate-900 border-r border-slate-100 dark:border-slate-800 text-xs">
+            <tr key={model} className="hover:bg-slate-50 dark:hover:bg-white/5/30 transition-colors">
+              <td className="px-4 py-2 font-semibold text-slate-900 dark:text-slate-100 sticky left-0 bg-white dark:bg-ink-card border-r border-slate-100 dark:border-ink-border text-xs">
                 {model}
               </td>
               {providers.map((provider) => (

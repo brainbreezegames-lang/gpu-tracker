@@ -13,7 +13,7 @@ export const AboutPage: React.FC = () => (
     </div>
 
     {/* What is this */}
-    <div className="bg-white dark:bg-slate-900 rounded-xl border border-slate-200 dark:border-slate-800 p-5">
+    <div className="bg-white dark:bg-ink-card rounded-xl border border-slate-200 dark:border-ink-border p-5">
       <div className="flex items-center gap-2 mb-3">
         <Cpu className="h-4 w-4 text-brand-500" />
         <h2 className="text-sm font-semibold text-slate-900 dark:text-white">What is GPU Tracker?</h2>
@@ -34,7 +34,7 @@ export const AboutPage: React.FC = () => (
     </div>
 
     {/* How it works — streamlined */}
-    <div className="bg-white dark:bg-slate-900 rounded-xl border border-slate-200 dark:border-slate-800 p-5">
+    <div className="bg-white dark:bg-ink-card rounded-xl border border-slate-200 dark:border-ink-border p-5">
       <div className="flex items-center gap-2 mb-4">
         <GitBranch className="h-4 w-4 text-brand-500" />
         <h2 className="text-sm font-semibold text-slate-900 dark:text-white">How It Works</h2>
@@ -61,7 +61,7 @@ export const AboutPage: React.FC = () => (
     </div>
 
     {/* Coverage */}
-    <div className="bg-white dark:bg-slate-900 rounded-xl border border-slate-200 dark:border-slate-800 p-5">
+    <div className="bg-white dark:bg-ink-card rounded-xl border border-slate-200 dark:border-ink-border p-5">
       <h2 className="text-sm font-semibold text-slate-900 dark:text-white mb-3">Coverage</h2>
       <div className="grid grid-cols-2 sm:grid-cols-3 gap-2 text-xs">
         {[
@@ -88,7 +88,7 @@ export const AboutPage: React.FC = () => (
           ['Crusoe',        'H100 — US (green)'],
           ['Latitude.sh',   'Bare metal GPU — global'],
         ].map(([provider, note]) => (
-          <div key={provider} className="flex items-start gap-1.5 p-2 rounded-lg bg-slate-50 dark:bg-slate-800/50">
+          <div key={provider} className="flex items-start gap-1.5 p-2 rounded-lg bg-slate-50 dark:bg-white/4">
             <span className="h-1.5 w-1.5 rounded-full bg-emerald-500 shrink-0 mt-1" />
             <div>
               <div className="font-semibold text-slate-700 dark:text-slate-300">{provider}</div>

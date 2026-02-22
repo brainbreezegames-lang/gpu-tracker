@@ -179,7 +179,7 @@ const AlertForm: React.FC<{
     `px-3 py-1.5 text-[11px] rounded-lg font-semibold border transition-all cursor-pointer ${
       active
         ? 'bg-slate-900 dark:bg-white text-white dark:text-slate-900 border-slate-900 dark:border-white'
-        : 'bg-white dark:bg-slate-800 text-slate-500 dark:text-slate-400 border-slate-200 dark:border-slate-700 hover:border-slate-400 dark:hover:border-slate-500'
+        : 'bg-white dark:bg-ink-muted text-slate-500 dark:text-slate-400 border-slate-200 dark:border-ink-border hover:border-slate-400 dark:hover:border-slate-500'
     }`;
 
   const toggle = (active: boolean) =>

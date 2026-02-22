@@ -193,7 +193,7 @@ export const PricingPage: React.FC = () => {
                         ? 'bg-brand-400/20 text-brand-600 dark:text-brand-400'
                         : feat.included
                         ? 'bg-emerald-100 dark:bg-emerald-500/20 text-emerald-600 dark:text-emerald-400'
-                        : 'bg-slate-100 dark:bg-slate-800 text-slate-300 dark:text-slate-600'
+                        : 'bg-slate-100 dark:bg-ink-muted text-slate-300 dark:text-slate-600'
                     }`}>
                       <Check className="h-2.5 w-2.5" strokeWidth={3} />
                     </div>

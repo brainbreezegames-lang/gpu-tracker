@@ -8,7 +8,7 @@ const CodeBlock: React.FC<{ children: string }> = ({ children }) => (
 );
 
 const Section: React.FC<{ title: string; icon: React.FC<{ className?: string }>; children: React.ReactNode }> = ({ title, icon: Icon, children }) => (
-  <div className="bg-white dark:bg-slate-900 rounded-xl border border-slate-200 dark:border-slate-800 p-5">
+  <div className="bg-white dark:bg-ink-card rounded-xl border border-slate-200 dark:border-ink-border p-5">
     <div className="flex items-center gap-2 mb-3">
       <Icon className="h-4 w-4 text-brand-500" />
       <h3 className="text-sm font-semibold text-slate-900 dark:text-white">{title}</h3>
@@ -28,7 +28,7 @@ export const APIPage: React.FC = () => (
 
     {/* Endpoint */}
     <Section title="Endpoint" icon={Code}>
-      <div className="flex items-center gap-2 bg-slate-50 dark:bg-slate-800 rounded-lg px-3 py-2 font-mono text-xs mb-3">
+      <div className="flex items-center gap-2 bg-slate-50 dark:bg-ink-muted rounded-lg px-3 py-2 font-mono text-xs mb-3">
         <span className="text-emerald-600 dark:text-emerald-400 font-bold shrink-0">GET</span>
         <span className="text-slate-700 dark:text-slate-300 break-all">https://v2-murex-ten.vercel.app/gpu-data.json</span>
       </div>
@@ -89,7 +89,7 @@ for row in h100s[:5]:
     <Section title="Providers" icon={RefreshCw}>
       <div className="flex flex-wrap gap-1.5 mb-3">
         {['AWS', 'Azure', 'GCP', 'OCI', 'Lambda Labs', 'RunPod', 'Vast.ai', 'Vultr', 'Cudo', 'Nebius', 'TensorDock', 'DigitalOcean', 'HotAisle', 'CloudRift', 'Verda', 'Scaleway', 'Hyperstack', 'Genesis Cloud', 'OVHcloud', 'CoreWeave', 'Crusoe', 'Latitude.sh'].map((name) => (
-          <span key={name} className="text-xs px-2 py-1 rounded-md bg-slate-50 dark:bg-slate-800/50 text-slate-600 dark:text-slate-400 font-medium">{name}</span>
+          <span key={name} className="text-xs px-2 py-1 rounded-md bg-slate-50 dark:bg-white/4 text-slate-600 dark:text-slate-400 font-medium">{name}</span>
         ))}
       </div>
       <p className="text-xs text-slate-400 dark:text-slate-500">
