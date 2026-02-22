@@ -165,11 +165,11 @@ const MultiSelect: React.FC<MultiSelectProps> = ({ options, selected, onChange, 
               >
                 <span className={`h-3.5 w-3.5 shrink-0 rounded border flex items-center justify-center transition-colors ${
                   checked
-                    ? 'bg-slate-900 dark:bg-white border-slate-900 dark:border-white'
+                    ? 'bg-slate-900 dark:bg-brand-500 border-slate-900 dark:border-brand-400'
                     : 'border-slate-300 dark:border-slate-600'
                 }`}>
                   {checked && (
-                    <svg className="h-2 w-2 text-white dark:text-slate-900" viewBox="0 0 10 10" fill="none">
+                    <svg className="h-2 w-2 text-white" viewBox="0 0 10 10" fill="none">
                       <path d="M1.5 5L4 7.5L8.5 2.5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
                     </svg>
                   )}
@@ -215,7 +215,7 @@ const MultiSelect: React.FC<MultiSelectProps> = ({ options, selected, onChange, 
           selected.map((s) => (
             <span
               key={s}
-              className="inline-flex items-center gap-1 bg-slate-900 dark:bg-white text-white dark:text-slate-900 text-[11px] font-semibold px-2 py-0.5 rounded-md"
+              className="inline-flex items-center gap-1 bg-slate-900 dark:bg-brand-400/15 text-white dark:text-brand-400 text-[11px] font-semibold px-2 py-0.5 rounded-md border border-transparent dark:border-brand-400/25"
             >
               {s}
               <button
@@ -258,7 +258,7 @@ const SectionLabel: React.FC<{ title: string; count?: number; tooltip?: string }
 const chip = (active: boolean) =>
   `px-3 sm:px-3.5 py-2.5 sm:py-2 text-xs rounded-lg font-semibold border transition-colors min-h-[36px] ${
     active
-      ? 'bg-slate-900 dark:bg-white text-white dark:text-slate-900 border-slate-900 dark:border-white'
+      ? 'bg-slate-900 dark:bg-brand-400/10 text-white dark:text-brand-400 border-slate-900 dark:border-brand-400/25'
       : 'bg-white dark:bg-ink-muted text-slate-600 dark:text-slate-400 border-slate-200 dark:border-ink-border hover:border-slate-400 dark:hover:border-slate-500'
   }`;
 
